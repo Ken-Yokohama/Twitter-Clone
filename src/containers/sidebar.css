@@ -7,6 +7,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow-y: scroll;
+}
+
+@media (min-height: 620px) {
+    .sidebar {
+        overflow-y: auto;
+    }
 }
 
 .sidebar-menu {
@@ -61,6 +68,20 @@
 
 .sidebarOptionContainer:hover > .sidebarOption {
     background-color: rgb(216, 216, 216);
+}
+
+.sidebar-profile-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 10rem;
+    cursor: pointer;
+}
+
+.sidebar-account {
+    display: flex;
 }
 
 .twitterLogo {

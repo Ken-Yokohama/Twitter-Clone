@@ -13,6 +13,8 @@ import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import Avatar from "@mui/material/Avatar";
 
 function Sidebar(props) {
     const navigate = useNavigate();
@@ -146,7 +148,32 @@ function Sidebar(props) {
                     Tweet
                 </Button>
             </div>
-            <button onClick={logout}>SignOut</button>
+            <div className="sidebar-profile-container sidebarOption">
+                <div className="sidebar-account">
+                    <Avatar />
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            marginLeft: "0.75rem",
+                            marginTop: "-0.5rem",
+                        }}
+                    >
+                        <h4>
+                            {auth?.currentUser?.email.substring(0, 12)}
+                            {auth?.currentUser?.email.length > 12 && "..."}
+                        </h4>
+                        <h5 style={{ fontWeight: "400" }}>
+                            @{auth?.currentUser?.email.substring(0, 12)}
+                            {auth?.currentUser?.email.length > 12 && "..."}
+                        </h5>
+                    </div>
+                    {/* <button onClick={logout}>SignOut</button> */}
+                </div>
+                <MoreHorizIcon />
+            </div>
         </div>
     );
 }
