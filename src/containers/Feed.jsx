@@ -14,7 +14,7 @@ function Feed(props) {
     return (
         <div>
             <Routes>
-                <Route path="/" element={<Main />} />
+                <Route path="/*" element={<Main />} />
                 <Route path="/explore" element={<Explore />} />
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path="/messages" element={<Messages />} />
