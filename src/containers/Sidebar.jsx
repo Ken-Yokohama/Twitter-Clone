@@ -12,9 +12,10 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import Avatar from "@mui/material/Avatar";
+import Popover from "@mui/material/Popover";
 
 function Sidebar(props) {
     const navigate = useNavigate();
@@ -22,6 +23,19 @@ function Sidebar(props) {
     const logout = async () => {
         await signOut(auth);
     };
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handlePopover = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? "simple-popover" : undefined;
 
     return (
         <div className="sidebar">
@@ -148,7 +162,57 @@ function Sidebar(props) {
                     Tweet
                 </Button>
             </div>
-            <div className="sidebar-profile-container sidebarOption">
+
+            <Popover
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "center",
+                }}
+                transformOrigin={{
+                    vertical: "bottom",
+                    horizontal: "center",
+                }}
+            >
+                <div
+                    className="sidebar-account"
+                    style={{ padding: "1rem", marginBottom: "-0.5rem" }}
+                >
+                    <Avatar />
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            marginLeft: "0.75rem",
+                            marginTop: "-0.5rem",
+                        }}
+                    >
+                        <h4>{auth?.currentUser?.email}</h4>
+                        <h5 style={{ fontWeight: "400" }}>
+                            @{auth?.currentUser?.email}
+                            {auth?.currentUser?.email.length > 12 && "..."}
+                        </h5>
+                    </div>
+                </div>
+                <Typography
+                    sx={{ p: 2, cursor: "pointer" }}
+                    className="sidebarOption"
+                    onClick={logout}
+                    style={{ borderRadius: "0" }}
+                >
+                    Log out {auth?.currentUser?.email}
+                </Typography>
+            </Popover>
+            <div
+                className="sidebar-profile-container sidebarOption"
+                aria-describedby={id}
+                onClick={handlePopover}
+            >
                 <div className="sidebar-account">
                     <Avatar />
                     <div
@@ -170,7 +234,6 @@ function Sidebar(props) {
                             {auth?.currentUser?.email.length > 12 && "..."}
                         </h5>
                     </div>
-                    {/* <button onClick={logout}>SignOut</button> */}
                 </div>
                 <MoreHorizIcon />
             </div>
