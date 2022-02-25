@@ -19,3 +19,11 @@ V1.0 24 Feb '22 - Original Release
 - Sectioned Home Page into 3 components: Sidebar Menu, Feed & Widgets
 - Set Sidebar and Widgets to be Sticky
 - Created Tweetbox with MUI
+
+V1.1 24 Feb '22 - Added Layout for Tweets, User Profile & Responsiveness
+
+- Added Schema for Template, Button and Icons for Tweets
+- Added CSS for Tweets
+- Added Sidebar Profile & Modal
+- Moved Logout Button to the Sidebar Profile Modal
+- Added Vertical Scrolling to Sidebar if items overflow
