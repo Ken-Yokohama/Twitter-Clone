@@ -100,12 +100,24 @@ function Tweet({
                             <div className="tweet-menu-icons">
                                 <FavoriteBorderTwoToneIcon
                                     fontSize="small"
-                                    sx={{ color: "#536471" }}
+                                    sx={{
+                                        color: "#536471",
+                                        color:
+                                            likes.includes(
+                                                auth?.currentUser?.email
+                                            ) && "red",
+                                    }}
                                 />
                             </div>
                             <h5
                                 className="tweet-menu-count"
-                                style={{ fontWeight: "100" }}
+                                style={{
+                                    fontWeight: "100",
+                                    color:
+                                        likes.includes(
+                                            auth?.currentUser?.email
+                                        ) && "red",
+                                }}
                             >
                                 {likes.length}
                             </h5>
