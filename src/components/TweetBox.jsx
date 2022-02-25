@@ -64,6 +64,7 @@ function TweetBox(props) {
                 likes: [],
                 tweetText: tweetInput,
             });
+            setTweetInput("");
             setLoading(false);
         } catch (err) {
             setFileSelectError("Tweet Failed to Post Please Try Again");
@@ -104,6 +105,7 @@ function TweetBox(props) {
                         onChange={(e) => {
                             setTweetInput(e.target.value);
                         }}
+                        value={tweetInput}
                     />
                     <hr style={{ border: "1px solid #EFF3F4" }} />
                     <Box

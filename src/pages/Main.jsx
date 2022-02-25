@@ -44,7 +44,7 @@ function Main(props) {
                         0,
                         tweet.author.lastIndexOf("@")
                     )}
-                    date={tweet.date.toDate().toDateString()}
+                    date={tweet.date?.toDate()?.toDateString()}
                     tweetText={tweet.tweetText}
                     imgSrc={tweet.imgSrc}
                     likes={tweet.likes}

@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { addDoc, collection, getFirestore, getDocs } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -38,3 +39,5 @@ export const SignInWithGoogle = async () => {
         await addDoc(usersCollectionRef, { user: auth.currentUser.email });
     }
 };
+
+export const storage = getStorage(app);
