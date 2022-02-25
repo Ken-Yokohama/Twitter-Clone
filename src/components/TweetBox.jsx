@@ -168,7 +168,10 @@ function TweetBox(props) {
                                 },
                             }}
                             disabled={
-                                tweetInput.length != 0 || file ? false : true
+                                !fileSelectError &&
+                                (tweetInput.length != 0 || file)
+                                    ? false
+                                    : true
                             }
                             onClick={handleTweetButton}
                             loading={loading}
