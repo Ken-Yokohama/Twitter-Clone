@@ -1,4 +1,11 @@
-import { collection, onSnapshot } from "firebase/firestore";
+import { bgcolor, Box } from "@mui/system";
+import {
+    collection,
+    limit,
+    onSnapshot,
+    orderBy,
+    query,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Tweet, TweetBox, TweetHeader } from "../components";
 import { auth, db } from "../firebase-config";
@@ -8,10 +15,17 @@ function Main(props) {
 
     const [tweets, setTweets] = useState([]);
 
+    const [queryLimit, setQueryLimit] = useState(10);
+
     const tweetCollectionRef = collection(db, "tweets");
+    const q = query(
+        tweetCollectionRef,
+        orderBy("date", "desc"),
+        limit(queryLimit)
+    );
 
     useEffect(() => {
-        const unsub = onSnapshot(tweetCollectionRef, (snapshot) => {
+        const unsub = onSnapshot(q, (snapshot) => {
             setTweets(
                 snapshot.docs.map((tweets) => ({
                     ...tweets.data(),
@@ -20,17 +34,8 @@ function Main(props) {
             );
         });
         return unsub;
-    }, []);
+    }, [queryLimit]);
 
-    {
-        /* <Tweet 
-        name={tweet.author.substring(0,tweet.author.lastIndexOf("@"))}
-        date={tweet.date.toDate().toDateString()}
-        tweetText={tweet.tweetText}
-        imgSrc={tweet.imgSrc}
-        likes={tweet.likes}
-    /> */
-    }
     return (
         <div>
             <TweetHeader />
@@ -50,6 +55,25 @@ function Main(props) {
                     likes={tweet.likes}
                 />
             ))}
+            <Box
+                onClick={() => {
+                    setQueryLimit((prevValue) => prevValue + 10);
+                }}
+                sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "75px",
+                    cursor: "pointer",
+                    color: "#43ABF2",
+                    transition: "background 0.25s",
+                    "&:hover": {
+                        backgroundColor: "rgb(29,155,240, .1)",
+                    },
+                }}
+            >
+                Show More
+            </Box>
             <Tweet
                 name={auth?.currentUser?.email.substring(
                     0,
