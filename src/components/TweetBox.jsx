@@ -1,9 +1,10 @@
 import { LoadingButton } from "@mui/lab";
 import { Avatar, Box, Button, Input } from "@mui/material";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import FormHelperText from "@mui/material/FormHelperText";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { auth, db } from "../firebase-config";
+import { auth, db, storage } from "../firebase-config";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 function TweetBox(props) {
     // Ref to File Input
@@ -56,20 +57,39 @@ function TweetBox(props) {
 
         const tweetCollectionRef = collection(db, "tweets");
 
-        try {
-            await addDoc(tweetCollectionRef, {
-                author: auth?.currentUser?.email,
-                date: serverTimestamp(),
-                imgSrc: "",
-                likes: [],
-                tweetText: tweetInput,
-            });
-            setTweetInput("");
-            setLoading(false);
-        } catch (err) {
-            setFileSelectError("Tweet Failed to Post Please Try Again");
-            setLoading(false);
-        }
+        const storageRef = ref(
+            storage,
+            `/files/${auth?.currentUser?.email}/${file.name}`
+        );
+        const uploadTask = uploadBytesResumable(storageRef, file);
+
+        const unsub = uploadTask.on(
+            "state_changed",
+            () => {},
+            (err) => {
+                setFileSelectError("Image Upload Failed");
+                setLoading(false);
+            },
+            async () => {
+                try {
+                    const url = await getDownloadURL(storageRef);
+                    await addDoc(tweetCollectionRef, {
+                        author: auth?.currentUser?.email,
+                        date: serverTimestamp(),
+                        imgSrc: url,
+                        likes: [],
+                        tweetText: tweetInput,
+                    });
+                    setTweetInput("");
+                    setFile(null);
+                    setLoading(false);
+                } catch (err) {
+                    setFileSelectError("Tweet Failed to Post Please Try Again");
+                    setLoading(false);
+                }
+            }
+        );
+        return unsub;
     };
 
     return (
