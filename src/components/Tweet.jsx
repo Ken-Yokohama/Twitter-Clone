@@ -9,17 +9,21 @@ import "./tweet.css";
 function Tweet({ name, date, imgSrc, tweetText, likes }) {
     return (
         <div>
-            Tweets
             <div style={{ display: "flex", padding: "1rem", gap: "1rem" }}>
                 <Avatar />
-                <div>
+                <div style={{ flex: "1" }}>
                     <div style={{ display: "flex" }}>
                         <h3>{name}</h3>
                         <h3 style={{ fontWeight: "400" }}>
                             @{name} · {date}
                         </h3>
                     </div>
-                    <h4 style={{ fontWeight: "400", marginBottom: "0.5rem" }}>
+                    <h4
+                        style={{
+                            fontWeight: "400",
+                            marginBottom: "0.5rem",
+                        }}
+                    >
                         {tweetText}
                     </h4>
                     {imgSrc && (

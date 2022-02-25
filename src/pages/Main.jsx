@@ -37,6 +37,7 @@ function Main(props) {
             <TweetBox />
             {tweets.map((tweet, index) => (
                 <Tweet
+                    key={tweet.id}
                     name={tweet.author.substring(
                         0,
                         tweet.author.lastIndexOf("@")
