@@ -7,8 +7,6 @@ import IosShareIcon from "@mui/icons-material/IosShare";
 import "./tweet.css";
 
 function Tweet({ name, date, imgSrc, tweetText, likes }) {
-    const imageExists = true;
-
     return (
         <div>
             Tweets
@@ -21,8 +19,10 @@ function Tweet({ name, date, imgSrc, tweetText, likes }) {
                             @{name} · {date}
                         </h3>
                     </div>
-                    <h4 style={{ fontWeight: "400" }}>{tweetText}</h4>
-                    {imageExists && (
+                    <h4 style={{ fontWeight: "400", marginBottom: "0.5rem" }}>
+                        {tweetText}
+                    </h4>
+                    {imgSrc && (
                         <img
                             width={"100%"}
                             src={imgSrc}
