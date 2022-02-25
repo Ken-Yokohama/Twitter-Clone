@@ -5,8 +5,31 @@ import AutorenewTwoToneIcon from "@mui/icons-material/AutorenewTwoTone";
 import FavoriteBorderTwoToneIcon from "@mui/icons-material/FavoriteBorderTwoTone";
 import IosShareIcon from "@mui/icons-material/IosShare";
 import "./tweet.css";
+import { doc, updateDoc } from "firebase/firestore";
+import { auth, db } from "../firebase-config";
 
-function Tweet({ name, date, imgSrc, tweetText, likes }) {
+function Tweet({
+    tweetCollectionRef,
+    tweetId,
+    name,
+    date,
+    imgSrc,
+    tweetText,
+    likes,
+}) {
+    const handleLikeButton = async () => {
+        const targetTweetRef = doc(db, "tweets", tweetId);
+        if (likes.includes(auth?.currentUser?.email)) {
+            const newLikes = likes.filter((like) => {
+                return like != auth?.currentUser?.email;
+            });
+            await updateDoc(targetTweetRef, { likes: newLikes });
+        } else {
+            const newLikes = [...likes, auth?.currentUser?.email];
+            await updateDoc(targetTweetRef, { likes: newLikes });
+        }
+    };
+
     return (
         <div>
             <div style={{ display: "flex", padding: "1rem", gap: "1rem" }}>
@@ -73,7 +96,7 @@ function Tweet({ name, date, imgSrc, tweetText, likes }) {
                             </h5>
                         </div>
                         {/* Likes */}
-                        <div className="tweet-menu">
+                        <div className="tweet-menu" onClick={handleLikeButton}>
                             <div className="tweet-menu-icons">
                                 <FavoriteBorderTwoToneIcon
                                     fontSize="small"

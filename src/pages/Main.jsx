@@ -38,6 +38,8 @@ function Main(props) {
             {tweets.map((tweet, index) => (
                 <Tweet
                     key={tweet.id}
+                    tweetCollectionRef={tweetCollectionRef}
+                    tweetId={tweet.id}
                     name={tweet.author.substring(
                         0,
                         tweet.author.lastIndexOf("@")
