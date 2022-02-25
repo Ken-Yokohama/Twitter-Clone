@@ -1,8 +1,39 @@
 import { LoadingButton } from "@mui/lab";
 import { Avatar, Box, Button, Input } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import FormHelperText from "@mui/material/FormHelperText";
 
 function TweetBox(props) {
+    // Ref to File Input
+    const hiddenFileInput = React.useRef(null);
+
+    const handleMediaButton = () => {
+        // Call File Input
+        hiddenFileInput.current.click();
+    };
+
+    const [file, setFile] = useState(null);
+    const [fileSelectError, setFileSelectError] = useState(null);
+
+    const handleSelectedFile = (e) => {
+        const selectedFile = e.target.files[0];
+        const allowedFileTypes = ["image/jpg", "image/jpeg", "image/png"];
+        if (selectedFile && allowedFileTypes.includes(selectedFile.type)) {
+            setFile(selectedFile);
+            setFileSelectError(null);
+        } else {
+            setFile(null);
+            setFileSelectError(
+                "Please upload an image of proper format (jpg, jpeg or png)"
+            );
+        }
+    };
+
+    const [tweetInput, setTweetInput] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const handleTweetButton = async () => {};
+
     return (
         <div>
             <Box
@@ -32,6 +63,9 @@ function TweetBox(props) {
                             lineHeight: "24px",
                             color: "#0f1419",
                         }}
+                        onChange={(e) => {
+                            setTweetInput(e.target.value);
+                        }}
                     />
                     <hr style={{ border: "1px solid #EFF3F4" }} />
                     <Box
@@ -40,7 +74,29 @@ function TweetBox(props) {
                             justifyContent: "space-between",
                         }}
                     >
-                        <Button>Media</Button>
+                        <input
+                            type="file"
+                            style={{ display: "none" }}
+                            ref={hiddenFileInput}
+                            onChange={handleSelectedFile}
+                        />
+                        <div
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "1rem",
+                            }}
+                        >
+                            <Button onClick={handleMediaButton}>Media</Button>
+                            {file && (
+                                <FormHelperText>{file.name}</FormHelperText>
+                            )}
+                            {fileSelectError && (
+                                <FormHelperText error>
+                                    {fileSelectError}
+                                </FormHelperText>
+                            )}
+                        </div>
                         <LoadingButton
                             variant="contained"
                             sx={{
@@ -51,7 +107,8 @@ function TweetBox(props) {
                                     bgcolor: "#1a8cd8",
                                 },
                             }}
-                            loading={true}
+                            onClick={handleTweetButton}
+                            loading={loading}
                         >
                             Tweet
                         </LoadingButton>
