@@ -17,14 +17,30 @@ function TweetBox(props) {
 
     const handleSelectedFile = (e) => {
         const selectedFile = e.target.files[0];
-        const allowedFileTypes = ["image/jpg", "image/jpeg", "image/png"];
-        if (selectedFile && allowedFileTypes.includes(selectedFile.type)) {
+        const allowedFileTypes = [
+            "image/jpg",
+            "image/jpeg",
+            "image/png",
+            "image/gif",
+        ];
+        // 1mb = 100,000 bytes
+        const allowedFileSize = Number("500000");
+        if (
+            selectedFile &&
+            allowedFileTypes.includes(selectedFile.type) &&
+            allowedFileSize > selectedFile.size
+        ) {
             setFile(selectedFile);
             setFileSelectError(null);
+        } else if (allowedFileTypes.includes(selectedFile.type) == false) {
+            setFile(null);
+            setFileSelectError(
+                "Please upload an image of proper format (jpg, jpeg, png or gif)"
+            );
         } else {
             setFile(null);
             setFileSelectError(
-                "Please upload an image of proper format (jpg, jpeg or png)"
+                "Please upload an image file size less than 5mb"
             );
         }
     };
