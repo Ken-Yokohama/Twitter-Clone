@@ -2,6 +2,8 @@ import { LoadingButton } from "@mui/lab";
 import { Avatar, Box, Button, Input } from "@mui/material";
 import React, { useState, useRef } from "react";
 import FormHelperText from "@mui/material/FormHelperText";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { auth, db } from "../firebase-config";
 
 function TweetBox(props) {
     // Ref to File Input
@@ -23,16 +25,16 @@ function TweetBox(props) {
             "image/png",
             "image/gif",
         ];
-        // 1mb = 100,000 bytes
-        const allowedFileSize = Number("500000");
+        // 1mb = 1,000,000 bytes
+        const allowedFileSize = Number("5000000");
         if (
             selectedFile &&
-            allowedFileTypes.includes(selectedFile.type) &&
+            allowedFileTypes.includes(selectedFile?.type) &&
             allowedFileSize > selectedFile.size
         ) {
             setFile(selectedFile);
             setFileSelectError(null);
-        } else if (allowedFileTypes.includes(selectedFile.type) == false) {
+        } else if (allowedFileTypes.includes(selectedFile?.type) == false) {
             setFile(null);
             setFileSelectError(
                 "Please upload an image of proper format (jpg, jpeg, png or gif)"
@@ -48,7 +50,26 @@ function TweetBox(props) {
     const [tweetInput, setTweetInput] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const handleTweetButton = async () => {};
+    const handleTweetButton = async () => {
+        if (fileSelectError) return;
+        setLoading(true);
+
+        const tweetCollectionRef = collection(db, "tweets");
+
+        try {
+            await addDoc(tweetCollectionRef, {
+                author: auth?.currentUser?.email,
+                date: serverTimestamp(),
+                imgSrc: "",
+                likes: [],
+                tweetText: tweetInput,
+            });
+            setLoading(false);
+        } catch (err) {
+            setFileSelectError("Tweet Failed to Post Please Try Again");
+            setLoading(false);
+        }
+    };
 
     return (
         <div>
@@ -79,6 +100,7 @@ function TweetBox(props) {
                             lineHeight: "24px",
                             color: "#0f1419",
                         }}
+                        inputProps={{ maxLength: 280 }}
                         onChange={(e) => {
                             setTweetInput(e.target.value);
                         }}
@@ -123,6 +145,9 @@ function TweetBox(props) {
                                     bgcolor: "#1a8cd8",
                                 },
                             }}
+                            disabled={
+                                tweetInput.length != 0 || file ? false : true
+                            }
                             onClick={handleTweetButton}
                             loading={loading}
                         >
