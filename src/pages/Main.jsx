@@ -55,25 +55,27 @@ function Main(props) {
                     likes={tweet.likes}
                 />
             ))}
-            <Box
-                onClick={() => {
-                    setQueryLimit((prevValue) => prevValue + 10);
-                }}
-                sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: "75px",
-                    cursor: "pointer",
-                    color: "#43ABF2",
-                    transition: "background 0.25s",
-                    "&:hover": {
-                        backgroundColor: "rgb(29,155,240, .1)",
-                    },
-                }}
-            >
-                Show More
-            </Box>
+            {tweets.length + 1 > queryLimit && (
+                <Box
+                    onClick={() => {
+                        setQueryLimit((prevValue) => prevValue + 10);
+                    }}
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        height: "75px",
+                        cursor: "pointer",
+                        color: "#43ABF2",
+                        transition: "background 0.25s",
+                        "&:hover": {
+                            backgroundColor: "rgb(29,155,240, .1)",
+                        },
+                    }}
+                >
+                    Show More
+                </Box>
+            )}
             <Tweet
                 name={auth?.currentUser?.email.substring(
                     0,
