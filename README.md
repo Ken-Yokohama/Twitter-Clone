@@ -27,3 +27,12 @@ V1.1 24 Feb '22 - Added Layout for Tweets, User Profile & Responsiveness
 - Added Sidebar Profile & Modal
 - Moved Logout Button to the Sidebar Profile Modal
 - Added Vertical Scrolling to Sidebar if items overflow
+
+V1.2 25 Feb '22 - Implemented FireStore Databse and Firebase Storage
+
+- Added Tweet DB & Test Data from Firestore DB
+- Fixed Logic and CSS for displaying images when imageSrc is found in Tweet DB
+- Adjusted Tweet Buttons to fill extra space in container
+- Added Logic for like button to Write and Delete likes when post is liked/unliked
+- Added CSS Indicators for liked and unliked tweets
+- Added File Select Filtering to only allow file types of Jpg, Jpeg, Png & Gif's
