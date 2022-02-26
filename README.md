@@ -36,3 +36,10 @@ V1.2 25 Feb '22 - Implemented FireStore Databse and Firebase Storage
 - Added Logic for like button to Write and Delete likes when post is liked/unliked
 - Added CSS Indicators for liked and unliked tweets
 - Added File Select Filtering to only allow file types of Jpg, Jpeg, Png & Gif's
+- Added a file size upload limitation of 5 mb
+- Disabled Tweet from posting if there is no text input or if there is no file uploaded
+- Added Tweet writting to firebase db or text input
+- Added Dynamic Query Limits to show more tweets when users click Show More
+- Hid the show more button when query shows the last tweet in tweet db
+- Added Logic for Media Files to be uploaded in Tweets using Firebase Storage
+- Disabled Tweet Button if there is a fileSelect Error
