@@ -7,9 +7,11 @@ import IosShareIcon from "@mui/icons-material/IosShare";
 import "./tweet.css";
 import { doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../firebase-config";
+import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
 
 function Tweet({
     tweetCollectionRef,
+    fullNameEmail,
     tweetId,
     name,
     date,
@@ -35,11 +37,26 @@ function Tweet({
             <div style={{ display: "flex", padding: "1rem", gap: "1rem" }}>
                 <Avatar />
                 <div style={{ flex: "1" }}>
-                    <div style={{ display: "flex" }}>
-                        <h3>{name}</h3>
-                        <h3 style={{ fontWeight: "400" }}>
-                            @{name} · {date}
-                        </h3>
+                    <div
+                        style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                        }}
+                    >
+                        <div style={{ display: "flex" }}>
+                            <h3>{name}</h3>
+                            <h3 style={{ fontWeight: "400" }}>
+                                @{name} · {date}
+                            </h3>
+                        </div>
+                        {auth?.currentUser?.email == fullNameEmail && (
+                            <DeleteForeverTwoToneIcon
+                                fontSize="small"
+                                sx={{ cursor: "pointer" }}
+                            />
+                        )}
+                        {/* <DeleteForeverTwoToneIcon fontSize="small" /> */}
                     </div>
                     <h4
                         style={{
