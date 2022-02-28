@@ -5,7 +5,7 @@ import AutorenewTwoToneIcon from "@mui/icons-material/AutorenewTwoTone";
 import FavoriteBorderTwoToneIcon from "@mui/icons-material/FavoriteBorderTwoTone";
 import IosShareIcon from "@mui/icons-material/IosShare";
 import "./tweet.css";
-import { doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../firebase-config";
 import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
 
@@ -32,6 +32,11 @@ function Tweet({
         }
     };
 
+    const handleDeleteButton = async (id) => {
+        const targetTweetRef = doc(db, "tweets", id);
+        await deleteDoc(targetTweetRef);
+    };
+
     return (
         <div>
             <div style={{ display: "flex", padding: "1rem", gap: "1rem" }}>
@@ -54,6 +59,9 @@ function Tweet({
                             <DeleteForeverTwoToneIcon
                                 fontSize="small"
                                 sx={{ cursor: "pointer" }}
+                                onClick={() => {
+                                    handleDeleteButton(tweetId);
+                                }}
                             />
                         )}
                         {/* <DeleteForeverTwoToneIcon fontSize="small" /> */}
