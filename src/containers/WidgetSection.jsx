@@ -1,12 +1,8 @@
-import { Box } from "@mui/material";
 import React, { useState } from "react";
 import "./widgetSection.css";
+import { Widgets } from ".";
 
 function WidgetSection(props) {
-    const handleClickPortfolio = () => {
-        window.open("https://github.com/Ken-Yokohama/Twitter-Clone");
-    };
-
     return (
         <div
             className="widgetContainer"
@@ -21,28 +17,11 @@ function WidgetSection(props) {
             <h3 style={{ fontWeight: "100" }}>
                 Please feel free to view my other projects:
             </h3>
-            <Box
-                sx={{
-                    backgroundColor: "#F7F9F9",
-                    borderRadius: "1rem",
-                    cursor: "pointer",
-                    ":hover": {
-                        bgcolor: "#F2F4F4",
-                    },
-                    padding: "0.5rem",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "1rem",
-                }}
-                onClick={handleClickPortfolio}
-            >
-                <h4>Ken Yokohama - Portfolio</h4>
-                <img
-                    src="https://www.mediabistro.com/wp-content/uploads/2016/02/tips-on-getting-your-copywriter-portfolio-started.jpg"
-                    alt="portfolio-img"
-                    style={{ width: "100%", borderRadius: "1rem" }}
-                />
-            </Box>
+            <Widgets
+                projectName="Ken Yokohama - Portfolio"
+                imageSrc="https://www.mediabistro.com/wp-content/uploads/2016/02/tips-on-getting-your-copywriter-portfolio-started.jpg"
+                projectLink="https://github.com/Ken-Yokohama/Twitter-Clone"
+            />
         </div>
     );
 }
