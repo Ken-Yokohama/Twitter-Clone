@@ -13,6 +13,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Typography from "@mui/material/Typography";
+import { Comments } from ".";
 
 function Tweet({
     tweetCollectionRef,
@@ -50,9 +51,10 @@ function Tweet({
         transform: "translate(-50%, -50%)",
         width: 400,
         bgcolor: "background.paper",
-        border: "2px solid #000",
         boxShadow: 24,
+        borderRadius: "1rem",
         p: 4,
+        outline: "none",
     };
 
     const [open, setOpen] = React.useState(false);
@@ -211,6 +213,7 @@ function Tweet({
                             Duis mollis, est non commodo luctus, nisi erat
                             porttitor ligula.
                         </Typography>
+                        <Comments />
                     </Box>
                 </Fade>
             </Modal>
