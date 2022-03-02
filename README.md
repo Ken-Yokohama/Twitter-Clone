@@ -43,3 +43,8 @@ V1.2 25 Feb '22 - Implemented FireStore Databse and Firebase Storage
 - Hid the show more button when query shows the last tweet in tweet db
 - Added Logic for Media Files to be uploaded in Tweets using Firebase Storage
 - Disabled Tweet Button if there is a fileSelect Error
+
+V1.3 28 Feb '22 - Added Delete Functionality for Authenticated Users
+
+- Added CSS to display/hide tweet delete button based on user current user logged in
+- Added logic to delete tweet from firestore database when tweet delete button is pressed
