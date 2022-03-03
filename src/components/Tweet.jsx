@@ -1,4 +1,4 @@
-import { Avatar, Input } from "@mui/material";
+import { Avatar, Input, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import AutorenewTwoToneIcon from "@mui/icons-material/AutorenewTwoTone";
@@ -26,6 +26,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Comments } from ".";
 import { LoadingButton } from "@mui/lab";
 import { FormHelperText } from "@mui/material";
+import Popover from "@mui/material/Popover";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 function Tweet({
     tweetCollectionRef,
@@ -117,6 +119,20 @@ function Tweet({
             setLoadCommentButton(false);
         }
     };
+
+    // Popover for Share button
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handlePopover = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClosePopover = () => {
+        setAnchorEl(null);
+    };
+
+    const openPopover = Boolean(anchorEl);
+    const id = openPopover ? "simple-popover" : undefined;
 
     return (
         <div>
@@ -228,8 +244,12 @@ function Tweet({
                                 {likes.length}
                             </h5>
                         </div>
+                        {/* Share Button */}
                         <div className="tweet-menu">
-                            <div className="tweet-menu-icons">
+                            <div
+                                className="tweet-menu-icons"
+                                onClick={handlePopover}
+                            >
                                 <IosShareIcon
                                     fontSize="small"
                                     sx={{ visibility: "" }}
@@ -243,6 +263,44 @@ function Tweet({
                     </div>
                 </div>
             </div>
+
+            {/* Share Button Popover */}
+            <Popover
+                id={id}
+                open={openPopover}
+                anchorEl={anchorEl}
+                onClose={handleClosePopover}
+                anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "center",
+                }}
+                transformOrigin={{
+                    vertical: "bottom",
+                    horizontal: "center",
+                }}
+            >
+                <Typography
+                    sx={{ p: 2, cursor: "pointer" }}
+                    className="sidebarOption"
+                    style={{ borderRadius: "0" }}
+                >
+                    Add Tweet to Bookmarks
+                </Typography>
+                {imgSrc && (
+                    <CopyToClipboard text="testmanest">
+                        <Typography
+                            sx={{ p: 2, cursor: "pointer" }}
+                            className="sidebarOption"
+                            style={{ borderRadius: "0" }}
+                            onClick={handleClosePopover}
+                        >
+                            Copy Image Url
+                        </Typography>
+                    </CopyToClipboard>
+                )}
+            </Popover>
+
+            {/* Comment Button Modal */}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
