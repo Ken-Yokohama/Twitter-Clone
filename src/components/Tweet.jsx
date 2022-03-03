@@ -28,6 +28,7 @@ import { LoadingButton } from "@mui/lab";
 import { FormHelperText } from "@mui/material";
 import Popover from "@mui/material/Popover";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import Tooltip from "@mui/material/Tooltip";
 
 function Tweet({
     tweetCollectionRef,
@@ -186,13 +187,15 @@ function Tweet({
                             </h3>
                         </div>
                         {auth?.currentUser?.email == fullNameEmail && (
-                            <DeleteForeverTwoToneIcon
-                                fontSize="small"
-                                sx={{ cursor: "pointer" }}
-                                onClick={() => {
-                                    handleDeleteButton(tweetId);
-                                }}
-                            />
+                            <Tooltip title="Delete Tweet">
+                                <DeleteForeverTwoToneIcon
+                                    fontSize="small"
+                                    sx={{ cursor: "pointer" }}
+                                    onClick={() => {
+                                        handleDeleteButton(tweetId);
+                                    }}
+                                />
+                            </Tooltip>
                         )}
                         {/* <DeleteForeverTwoToneIcon fontSize="small" /> */}
                     </div>
