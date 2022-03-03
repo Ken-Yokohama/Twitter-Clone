@@ -7,3 +7,4 @@ export { default as Bookmarks } from "./Bookmarks";
 export { default as Lists } from "./Lists";
 export { default as Profile } from "./Profile";
 export { default as Loading } from "./Loading";
+export { default as ExploreProfile } from "./ExploreProfile";
