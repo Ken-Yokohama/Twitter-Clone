@@ -22,7 +22,7 @@ function Feed(props) {
                 <Route path="/messages" element={<Messages />} />
                 <Route path="/bookmarks" element={<Bookmarks />} />
                 <Route path="/lists" element={<Lists />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile/:username" element={<Profile />} />
             </Routes>
         </div>
     );

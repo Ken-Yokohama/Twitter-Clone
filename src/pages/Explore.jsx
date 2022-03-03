@@ -68,19 +68,11 @@ function Explore(props) {
                         },
                     }}
                     onClick={() => {
-                        selectedChoice && navigate(selectedChoice);
+                        selectedChoice &&
+                            navigate("/profile/" + selectedChoice);
                     }}
                 />
             </div>
-            <Routes>
-                {registeredUsers.map((user) => (
-                    <Route
-                        key={user.user}
-                        path={user.user}
-                        element={<ExploreProfile profileSearch={user.user} />}
-                    />
-                ))}
-            </Routes>
         </div>
     );
 }

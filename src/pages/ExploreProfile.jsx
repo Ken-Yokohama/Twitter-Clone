@@ -5,11 +5,13 @@ import {
     onSnapshot,
     orderBy,
     query,
+    where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
+import { Tweet } from "../components";
 import { db } from "../firebase-config";
 
-function ExploreProfile({ profileSearch }) {
+function ExploreProfile({ profileSearch, registeredUsers }) {
     const [tweets, setTweets] = useState([]);
 
     const [queryLimit, setQueryLimit] = useState(10);
@@ -17,8 +19,8 @@ function ExploreProfile({ profileSearch }) {
     const tweetCollectionRef = collection(db, "tweets");
     const q = query(
         tweetCollectionRef,
-        orderBy("date", "desc"),
-        limit(queryLimit)
+        limit(queryLimit),
+        where("author", "==", profileSearch)
     );
 
     useEffect(() => {
@@ -33,11 +35,31 @@ function ExploreProfile({ profileSearch }) {
         return unsub;
     }, [queryLimit]);
 
+    const [showCopyToClipboardAlert, setShowCopyToClipboardAlert] =
+        useState(false);
+    const [showAddToBookmarksAlert, setShowAddToBookmarksAlert] =
+        useState(false);
+
     return (
         <div>
-            {profileSearch}
             {tweets.map((tweet) => (
-                <div key={tweet.id}>{tweet.author}</div>
+                <Tweet
+                    key={tweet.id}
+                    tweetCollectionRef={tweetCollectionRef}
+                    tweetId={tweet.id}
+                    fullNameEmail={tweet.author}
+                    name={tweet.author.substring(
+                        0,
+                        tweet.author.lastIndexOf("@")
+                    )}
+                    date={tweet.date?.toDate()?.toDateString()}
+                    tweetText={tweet.tweetText}
+                    imgSrc={tweet.imgSrc}
+                    likes={tweet.likes}
+                    setShowCopyToClipboardAlert={setShowCopyToClipboardAlert}
+                    setShowAddToBookmarksAlert={setShowAddToBookmarksAlert}
+                    registeredUsers={registeredUsers}
+                />
             ))}
 
             {/* Show More Button */}
