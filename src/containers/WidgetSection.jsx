@@ -7,13 +7,16 @@ function WidgetSection(props) {
         <div
             className="widgetContainer"
             style={{
-                padding: "1rem",
+                paddingLeft: "1rem",
+                paddingRight: "1rem",
                 display: "flex",
                 flexDirection: "column",
                 gap: "1rem",
             }}
         >
-            <h2>Thanks for visiting my twitter clone project!</h2>
+            <h2 style={{ marginTop: "1rem" }}>
+                Thanks for visiting my twitter clone project!
+            </h2>
             <h3 style={{ fontWeight: "100" }}>
                 Please feel free to view my other projects:
             </h3>
