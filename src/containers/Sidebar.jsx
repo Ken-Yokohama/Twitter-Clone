@@ -132,7 +132,7 @@ function Sidebar(props) {
                     </div>
                 </NavLink>
                 <NavLink
-                    to={"/profile/" + auth?.currentUser?.email}
+                    to="/loadprofile"
                     className={({ isActive }) =>
                         isActive
                             ? "activeSidebarOptionContainer"

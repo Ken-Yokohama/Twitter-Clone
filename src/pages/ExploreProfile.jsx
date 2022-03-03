@@ -42,6 +42,7 @@ function ExploreProfile({ profileSearch, registeredUsers }) {
 
     return (
         <div>
+            {tweets.length == 0 && <div>No Data</div>}
             {tweets.map((tweet) => (
                 <Tweet
                     key={tweet.id}

@@ -6,6 +6,7 @@ import {
     Bookmarks,
     Explore,
     Lists,
+    LoadProfile,
     Main,
     Messages,
     Notifications,
@@ -23,6 +24,7 @@ function Feed(props) {
                 <Route path="/bookmarks" element={<Bookmarks />} />
                 <Route path="/lists" element={<Lists />} />
                 <Route path="/profile/:username" element={<Profile />} />
+                <Route path="/loadprofile" element={<LoadProfile />} />
             </Routes>
         </div>
     );
