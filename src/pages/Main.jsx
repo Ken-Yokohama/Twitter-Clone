@@ -11,8 +11,6 @@ import { Tweet, TweetBox, TweetHeader } from "../components";
 import { auth, db } from "../firebase-config";
 
 function Main(props) {
-    const likes = ["kenyo@gmail.com", "efknwenfwe", "wegnoiwehohie"];
-
     const [tweets, setTweets] = useState([]);
 
     const [queryLimit, setQueryLimit] = useState(10);

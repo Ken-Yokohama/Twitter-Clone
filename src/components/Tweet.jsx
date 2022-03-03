@@ -1,4 +1,4 @@
-import { Avatar } from "@mui/material";
+import { Avatar, Input } from "@mui/material";
 import React, { useState } from "react";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import AutorenewTwoToneIcon from "@mui/icons-material/AutorenewTwoTone";
@@ -12,8 +12,9 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
-import Typography from "@mui/material/Typography";
+import CloseIcon from "@mui/icons-material/Close";
 import { Comments } from ".";
+import { LoadingButton } from "@mui/lab";
 
 function Tweet({
     tweetCollectionRef,
@@ -49,17 +50,25 @@ function Tweet({
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        width: 400,
+        display: "flex",
+        flexDirection: "column",
+        width: 600,
+        height: "70%",
         bgcolor: "background.paper",
         boxShadow: 24,
         borderRadius: "1rem",
-        p: 4,
+        p: 1,
         outline: "none",
+        overflow: "auto",
     };
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const [commentsInput, setCommentsInput] = useState("");
+
+    const handleCommentButton = async () => {};
 
     return (
         <div>
@@ -199,21 +208,104 @@ function Tweet({
             >
                 <Fade in={open}>
                     <Box sx={style}>
-                        <Typography
-                            id="transition-modal-title"
-                            variant="h6"
-                            component="h2"
-                        >
-                            Text in a modal
-                        </Typography>
-                        <Typography
-                            id="transition-modal-description"
-                            sx={{ mt: 2 }}
-                        >
-                            Duis mollis, est non commodo luctus, nisi erat
-                            porttitor ligula.
-                        </Typography>
+                        {/* Close Button */}
+                        <Box>
+                            <CloseIcon
+                                onClick={handleClose}
+                                sx={{
+                                    fontSize: "2rem",
+                                    borderRadius: "1rem",
+                                    transition: "background 0.3s",
+                                    ":hover": {
+                                        bgcolor: "rgba(15, 20, 25, 0.1)",
+                                    },
+                                }}
+                            />
+                        </Box>
+                        {/* Comments */}
                         <Comments />
+                        <Comments />
+                        <Comments />
+                        <Comments />
+                        <Comments />
+                        <Comments />
+                        {/* Comments Input */}
+                        <Box
+                            sx={{
+                                display: "flex",
+                                padding: "4px 16px 8px 16px",
+                                gap: "16px",
+                            }}
+                        >
+                            <Avatar sx={{ marginTop: "3px" }} />
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    flexGrow: "1",
+                                    gap: "0.2rem",
+                                }}
+                            >
+                                <Input
+                                    id="outlined-multiline-flexible"
+                                    placeholder="Tweet your reply"
+                                    multiline
+                                    fullWidth
+                                    disableUnderline
+                                    sx={{
+                                        fontSize: "20px",
+                                        lineHeight: "24px",
+                                        color: "#0f1419",
+                                    }}
+                                    inputProps={{ maxLength: 280 }}
+                                    onChange={(e) => {
+                                        setCommentsInput(e.target.value);
+                                    }}
+                                    value={commentsInput}
+                                />
+                                <hr style={{ border: "1px solid #EFF3F4" }} />
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                    }}
+                                >
+                                    <div>
+                                        <h3 style={{ fontWeight: "100" }}>
+                                            Replying to{" "}
+                                            <span
+                                                style={{
+                                                    fontWeight: "400",
+                                                    color: "#6ABDF5",
+                                                }}
+                                            >
+                                                @testName
+                                            </span>
+                                        </h3>
+                                    </div>
+                                    <LoadingButton
+                                        variant="contained"
+                                        sx={{
+                                            bgcolor: "#1d9bf0",
+                                            borderRadius: "30px",
+                                            fontWeight: 600,
+                                            "&:hover": {
+                                                bgcolor: "#1a8cd8",
+                                            },
+                                        }}
+                                        disabled={
+                                            commentsInput.length != 0
+                                                ? false
+                                                : true
+                                        }
+                                        onClick={handleCommentButton}
+                                        loading={true}
+                                    >
+                                        Tweet
+                                    </LoadingButton>
+                                </Box>
+                            </Box>
+                        </Box>
                     </Box>
                 </Fade>
             </Modal>
