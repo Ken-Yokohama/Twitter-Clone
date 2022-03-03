@@ -3,13 +3,12 @@ import React, { useState } from "react";
 import { auth } from "../firebase-config";
 import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
 
-function Comments(props) {
-    const name = "testName";
-    const date = "testDate";
-    const fullNameEmail = "testFullNameEmail";
-    const tweetId = "testTweetId";
-    const tweetText =
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint autem nisi tempora tempore iste nemo eaque vero suscipit expedita ipsam.";
+function Comments({ comment }) {
+    const name = comment.author.substring(0, comment.author.lastIndexOf("@"));
+    const date = comment.timestamp?.toDate()?.toDateString();
+    const fullNameEmail = comment.author;
+    const tweetId = comment.id;
+    const tweetText = comment.text;
 
     const handleDeleteButton = async () => {};
 

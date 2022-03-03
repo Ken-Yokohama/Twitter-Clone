@@ -157,7 +157,7 @@ function Tweet({
                                 className="tweet-menu-count"
                                 style={{ fontWeight: "100" }}
                             >
-                                23
+                                {comments.length}
                             </h5>
                         </div>
                         {/* Retweets */}
@@ -173,7 +173,7 @@ function Tweet({
                                 className="tweet-menu-count"
                                 style={{ fontWeight: "100" }}
                             >
-                                23
+                                N/A
                             </h5>
                         </div>
                         {/* Likes */}
@@ -245,20 +245,10 @@ function Tweet({
                                 }}
                             />
                         </Box>
-                        {comments.map((comment) => (
-                            <div key={comment.id}>
-                                <h3>{comment.id}</h3>
-                                <h3>{comment.author}</h3>
-                                <h3>{comment.text}</h3>
-                            </div>
-                        ))}
                         {/* Comments */}
-                        <Comments />
-                        <Comments />
-                        <Comments />
-                        <Comments />
-                        <Comments />
-                        <Comments />
+                        {comments.map((comment) => (
+                            <Comments key={comment.id} comment={comment} />
+                        ))}
                         {/* Comments Input */}
                         <Box
                             sx={{
