@@ -12,7 +12,7 @@ import {
     where,
 } from "firebase/firestore";
 import { auth, db } from "../firebase-config";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { ExploreProfile } from ".";
 
 function Explore(props) {
@@ -27,6 +27,8 @@ function Explore(props) {
     }, []);
 
     const [selectedChoice, setSelectedChoice] = useState(null);
+
+    const navigate = useNavigate();
 
     return (
         <div>
@@ -64,6 +66,9 @@ function Explore(props) {
                         ":hover": {
                             backgroundColor: "#d8d8d8",
                         },
+                    }}
+                    onClick={() => {
+                        selectedChoice && navigate(selectedChoice);
                     }}
                 />
             </div>
