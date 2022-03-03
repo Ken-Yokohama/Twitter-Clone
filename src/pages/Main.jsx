@@ -1,10 +1,12 @@
 import { bgcolor, Box } from "@mui/system";
 import {
     collection,
+    getDocs,
     limit,
     onSnapshot,
     orderBy,
     query,
+    where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Tweet, TweetBox, TweetHeader } from "../components";
@@ -41,7 +43,22 @@ function Main(props) {
     const [showAddToBookmarksAlert, setShowAddToBookmarksAlert] =
         useState(false);
 
-    const handleClipboardAlert = () => {};
+    const [registeredUsers, setRegisteredUsers] = useState([]);
+
+    useEffect(async () => {
+        const usersCollectionRef = collection(db, "users");
+        const usersQuery = query(
+            usersCollectionRef,
+            where("user", "==", auth?.currentUser?.email)
+        );
+        const registeredUsersData = await getDocs(usersQuery);
+        setRegisteredUsers(
+            registeredUsersData.docs.map((users) => ({
+                ...users.data(),
+                id: users.id,
+            }))
+        );
+    }, []);
 
     return (
         <div>
@@ -63,9 +80,9 @@ function Main(props) {
                     likes={tweet.likes}
                     setShowCopyToClipboardAlert={setShowCopyToClipboardAlert}
                     setShowAddToBookmarksAlert={setShowAddToBookmarksAlert}
+                    registeredUsers={registeredUsers}
                 />
             ))}
-
             {/* Image Url Copied to Clipboard Alert */}
             <Alert
                 severity="success"
@@ -91,7 +108,6 @@ function Main(props) {
             >
                 Tweet Added to Bookmarks
             </Alert>
-
             {/* Load more tweets at bottom */}
             {tweets.length + 1 > queryLimit && (
                 <Box

@@ -40,6 +40,7 @@ function Tweet({
     likes,
     setShowCopyToClipboardAlert,
     setShowAddToBookmarksAlert,
+    registeredUsers,
 }) {
     const handleLikeButton = async () => {
         const targetTweetRef = doc(db, "tweets", tweetId);
@@ -144,7 +145,21 @@ function Tweet({
         }, 3000);
     };
 
-    const handleAddBookmarkAlert = () => {
+    const handleAddBookmarkAlert = async () => {
+        const bookmarksCollectionRef = collection(
+            db,
+            "users",
+            registeredUsers[0]?.id,
+            "bookmarks"
+        );
+        await addDoc(bookmarksCollectionRef, {
+            author: fullNameEmail,
+            date: date,
+            imgSrc: imgSrc,
+            likes: likes,
+            tweetText: tweetText,
+            dateBookmarked: serverTimestamp(),
+        });
         handleClosePopover();
         setShowAddToBookmarksAlert(true);
         setTimeout(() => {
