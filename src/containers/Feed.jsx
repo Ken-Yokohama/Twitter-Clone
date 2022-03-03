@@ -13,23 +13,6 @@ import {
 } from "../pages";
 
 function Feed(props) {
-    const [registeredUsers, setRegisteredUsers] = useState([]);
-
-    useEffect(async () => {
-        const usersCollectionRef = collection(db, "users");
-        const usersQuery = query(
-            usersCollectionRef,
-            where("user", "==", auth?.currentUser?.email)
-        );
-        const registeredUsersData = await getDocs(usersQuery);
-        setRegisteredUsers(
-            registeredUsersData.docs.map((users) => ({
-                ...users.data(),
-                id: users.id,
-            }))
-        );
-    }, []);
-
     return (
         <div>
             <Routes>
@@ -37,10 +20,7 @@ function Feed(props) {
                 <Route path="/explore" element={<Explore />} />
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path="/messages" element={<Messages />} />
-                <Route
-                    path="/bookmarks"
-                    element={<Bookmarks userId={registeredUsers[0]?.id} />}
-                />
+                <Route path="/bookmarks" element={<Bookmarks />} />
                 <Route path="/lists" element={<Lists />} />
                 <Route path="/profile" element={<Profile />} />
             </Routes>
