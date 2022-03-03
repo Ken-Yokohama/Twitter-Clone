@@ -6,12 +6,14 @@ import FavoriteBorderTwoToneIcon from "@mui/icons-material/FavoriteBorderTwoTone
 import IosShareIcon from "@mui/icons-material/IosShare";
 import "./tweet.css";
 import {
+    addDoc,
     collection,
     deleteDoc,
     doc,
     onSnapshot,
     orderBy,
     query,
+    serverTimestamp,
     updateDoc,
 } from "firebase/firestore";
 import { auth, db } from "../firebase-config";
@@ -23,6 +25,7 @@ import Fade from "@mui/material/Fade";
 import CloseIcon from "@mui/icons-material/Close";
 import { Comments } from ".";
 import { LoadingButton } from "@mui/lab";
+import { FormHelperText } from "@mui/material";
 
 function Tweet({
     tweetCollectionRef,
@@ -96,8 +99,24 @@ function Tweet({
     const handleClose = () => setOpen(false);
 
     const [commentsInput, setCommentsInput] = useState("");
+    const [loadCommentButton, setLoadCommentButton] = useState(false);
+    const [commentError, setCommentError] = useState(null);
 
-    const handleCommentButton = async () => {};
+    const handleCommentButton = async () => {
+        setLoadCommentButton(true);
+        try {
+            await addDoc(commentsCollectionRef, {
+                author: auth?.currentUser?.email,
+                text: commentsInput,
+                timestamp: serverTimestamp(),
+            });
+            setCommentsInput("");
+            setLoadCommentButton(false);
+        } catch (err) {
+            setCommentError(err.message);
+            setLoadCommentButton(false);
+        }
+    };
 
     return (
         <div>
@@ -309,26 +328,37 @@ function Tweet({
                                             </span>
                                         </h3>
                                     </div>
-                                    <LoadingButton
-                                        variant="contained"
-                                        sx={{
-                                            bgcolor: "#1d9bf0",
-                                            borderRadius: "30px",
-                                            fontWeight: 600,
-                                            "&:hover": {
-                                                bgcolor: "#1a8cd8",
-                                            },
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            gap: "0.5rem",
                                         }}
-                                        disabled={
-                                            commentsInput.length != 0
-                                                ? false
-                                                : true
-                                        }
-                                        onClick={handleCommentButton}
-                                        loading={true}
                                     >
-                                        Tweet
-                                    </LoadingButton>
+                                        <FormHelperText>
+                                            {commentError && commentError}
+                                        </FormHelperText>
+                                        <LoadingButton
+                                            variant="contained"
+                                            sx={{
+                                                bgcolor: "#1d9bf0",
+                                                borderRadius: "30px",
+                                                fontWeight: 600,
+                                                "&:hover": {
+                                                    bgcolor: "#1a8cd8",
+                                                },
+                                            }}
+                                            disabled={
+                                                commentsInput.length != 0
+                                                    ? false
+                                                    : true
+                                            }
+                                            onClick={handleCommentButton}
+                                            loading={loadCommentButton}
+                                        >
+                                            Reply
+                                        </LoadingButton>
+                                    </div>
                                 </Box>
                             </Box>
                         </Box>

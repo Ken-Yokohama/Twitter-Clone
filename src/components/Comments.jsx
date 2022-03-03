@@ -25,9 +25,17 @@ function Comments({ comment }) {
                         }}
                     >
                         <div style={{ display: "flex" }}>
-                            <h3>{name}</h3>
+                            <h3>
+                                {name.length > 13
+                                    ? name.substring(0, 13) + "..."
+                                    : name}
+                            </h3>
                             <h3 style={{ fontWeight: "400" }}>
-                                @{name} · {date}
+                                @
+                                {name.length > 13
+                                    ? name.substring(0, 13) + "..."
+                                    : name}{" "}
+                                · {date}
                             </h3>
                         </div>
                         {auth?.currentUser?.email == fullNameEmail && (
