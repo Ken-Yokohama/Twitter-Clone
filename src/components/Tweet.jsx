@@ -328,7 +328,7 @@ function Tweet({
                                                     color: "#6ABDF5",
                                                 }}
                                             >
-                                                @testName
+                                                @{name}
                                             </span>
                                         </h3>
                                     </div>
