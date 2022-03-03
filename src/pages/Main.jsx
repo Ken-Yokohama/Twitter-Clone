@@ -9,6 +9,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { Tweet, TweetBox, TweetHeader } from "../components";
 import { auth, db } from "../firebase-config";
+import Alert from "@mui/material/Alert";
 
 function Main(props) {
     const [tweets, setTweets] = useState([]);
@@ -34,6 +35,14 @@ function Main(props) {
         return unsub;
     }, [queryLimit]);
 
+    const [showCopyToClipboardAlert, setShowCopyToClipboardAlert] =
+        useState(false);
+
+    const [showAddToBookmarksAlert, setShowAddToBookmarksAlert] =
+        useState(false);
+
+    const handleClipboardAlert = () => {};
+
     return (
         <div>
             <TweetHeader />
@@ -52,8 +61,38 @@ function Main(props) {
                     tweetText={tweet.tweetText}
                     imgSrc={tweet.imgSrc}
                     likes={tweet.likes}
+                    setShowCopyToClipboardAlert={setShowCopyToClipboardAlert}
+                    setShowAddToBookmarksAlert={setShowAddToBookmarksAlert}
                 />
             ))}
+
+            {/* Image Url Copied to Clipboard Alert */}
+            <Alert
+                severity="success"
+                sx={{
+                    position: "fixed",
+                    top: "80%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    display: !showCopyToClipboardAlert && "none",
+                }}
+            >
+                Image Url Added to Clipboard
+            </Alert>
+            <Alert
+                severity="success"
+                sx={{
+                    position: "fixed",
+                    top: "80%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    display: !showAddToBookmarksAlert && "none",
+                }}
+            >
+                Tweet Added to Bookmarks
+            </Alert>
+
+            {/* Load more tweets at bottom */}
             {tweets.length + 1 > queryLimit && (
                 <Box
                     onClick={() => {

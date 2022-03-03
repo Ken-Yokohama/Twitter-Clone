@@ -38,6 +38,8 @@ function Tweet({
     imgSrc,
     tweetText,
     likes,
+    setShowCopyToClipboardAlert,
+    setShowAddToBookmarksAlert,
 }) {
     const handleLikeButton = async () => {
         const targetTweetRef = doc(db, "tweets", tweetId);
@@ -133,6 +135,22 @@ function Tweet({
 
     const openPopover = Boolean(anchorEl);
     const id = openPopover ? "simple-popover" : undefined;
+
+    const handleClipboardAlert = () => {
+        handleClosePopover();
+        setShowCopyToClipboardAlert(true);
+        setTimeout(() => {
+            setShowCopyToClipboardAlert(false);
+        }, 3000);
+    };
+
+    const handleAddBookmarkAlert = () => {
+        handleClosePopover();
+        setShowAddToBookmarksAlert(true);
+        setTimeout(() => {
+            setShowAddToBookmarksAlert(false);
+        }, 3000);
+    };
 
     return (
         <div>
@@ -254,10 +272,6 @@ function Tweet({
                                     fontSize="small"
                                     sx={{ visibility: "" }}
                                 />
-                                {/* Add 2 options for sharing: 
-                                    - Copy to Clipboard the Text Content
-                                    - Copy to Clipboard the Image Source
-                                 */}
                             </div>
                         </div>
                     </div>
@@ -283,16 +297,17 @@ function Tweet({
                     sx={{ p: 2, cursor: "pointer" }}
                     className="sidebarOption"
                     style={{ borderRadius: "0" }}
+                    onClick={handleAddBookmarkAlert}
                 >
                     Add Tweet to Bookmarks
                 </Typography>
                 {imgSrc && (
-                    <CopyToClipboard text="testmanest">
+                    <CopyToClipboard text={imgSrc}>
                         <Typography
                             sx={{ p: 2, cursor: "pointer" }}
                             className="sidebarOption"
                             style={{ borderRadius: "0" }}
-                            onClick={handleClosePopover}
+                            onClick={handleClipboardAlert}
                         >
                             Copy Image Url
                         </Typography>
