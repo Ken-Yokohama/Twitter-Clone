@@ -11,11 +11,8 @@ import {
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../firebase-config";
-import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
-import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
-import AutorenewTwoToneIcon from "@mui/icons-material/AutorenewTwoTone";
-import FavoriteBorderTwoToneIcon from "@mui/icons-material/FavoriteBorderTwoTone";
-import IosShareIcon from "@mui/icons-material/IosShare";
+import BookmarkRemoveIcon from "@mui/icons-material/BookmarkRemove";
+import Tooltip from "@mui/material/Tooltip";
 
 function Bookmarks({}) {
     const [bookmarkedTweets, setBookmarkedTweets] = useState([]);
@@ -59,12 +56,6 @@ function Bookmarks({}) {
         await deleteDoc(targetTweetRef);
     };
 
-    const handleOpen = () => {};
-
-    const handleLikeButton = () => {};
-
-    const handlePopover = () => {};
-
     return (
         <div>
             <div className="main-title">
@@ -100,13 +91,15 @@ function Bookmarks({}) {
                                     · {bookmark.date}
                                 </h3>
                             </div>
-                            <DeleteForeverTwoToneIcon
-                                fontSize="small"
-                                sx={{ cursor: "pointer" }}
-                                onClick={() => {
-                                    handleDeleteButton(bookmark.id);
-                                }}
-                            />
+                            <Tooltip title="Remove Bookmark">
+                                <BookmarkRemoveIcon
+                                    fontSize="small"
+                                    sx={{ cursor: "pointer" }}
+                                    onClick={() => {
+                                        handleDeleteButton(bookmark.id);
+                                    }}
+                                />
+                            </Tooltip>
                         </div>
                         <h4
                             style={{
@@ -124,87 +117,6 @@ function Bookmarks({}) {
                                 style={{ borderRadius: "1rem" }}
                             />
                         )}
-
-                        <div
-                            style={{
-                                display: "grid",
-                                gridTemplateColumns: "1fr 1fr 1fr 1fr",
-                            }}
-                        >
-                            {/* Comments */}
-                            <div className="tweet-menu" onClick={handleOpen}>
-                                <div className="tweet-menu-icons">
-                                    <CommentOutlinedIcon
-                                        fontSize="small"
-                                        sx={{ color: "#536471" }}
-                                    />
-                                </div>
-                                <h5
-                                    className="tweet-menu-count"
-                                    style={{ fontWeight: "100" }}
-                                >
-                                    N/A
-                                </h5>
-                            </div>
-                            {/* Retweets */}
-                            <div className="tweet-menu">
-                                {/* style={{display: "hidden"}} */}
-                                <div className="tweet-menu-icons">
-                                    <AutorenewTwoToneIcon
-                                        fontSize="small"
-                                        sx={{ color: "#536471" }}
-                                    />
-                                </div>
-                                <h5
-                                    className="tweet-menu-count"
-                                    style={{ fontWeight: "100" }}
-                                >
-                                    N/A
-                                </h5>
-                            </div>
-                            {/* Likes */}
-                            <div
-                                className="tweet-menu"
-                                onClick={handleLikeButton}
-                            >
-                                <div className="tweet-menu-icons">
-                                    <FavoriteBorderTwoToneIcon
-                                        fontSize="small"
-                                        sx={{
-                                            color: "#536471",
-                                            color:
-                                                bookmark.likes.includes(
-                                                    auth?.currentUser?.email
-                                                ) && "red",
-                                        }}
-                                    />
-                                </div>
-                                <h5
-                                    className="tweet-menu-count"
-                                    style={{
-                                        fontWeight: "100",
-                                        color:
-                                            bookmark.likes.includes(
-                                                auth?.currentUser?.email
-                                            ) && "red",
-                                    }}
-                                >
-                                    {bookmark.likes.length}
-                                </h5>
-                            </div>
-                            {/* Share Button */}
-                            <div className="tweet-menu">
-                                <div
-                                    className="tweet-menu-icons"
-                                    onClick={handlePopover}
-                                >
-                                    <IosShareIcon
-                                        fontSize="small"
-                                        sx={{ visibility: "" }}
-                                    />
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             ))}
