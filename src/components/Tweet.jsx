@@ -1,11 +1,17 @@
 import { Avatar, Input } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import AutorenewTwoToneIcon from "@mui/icons-material/AutorenewTwoTone";
 import FavoriteBorderTwoToneIcon from "@mui/icons-material/FavoriteBorderTwoTone";
 import IosShareIcon from "@mui/icons-material/IosShare";
 import "./tweet.css";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import {
+    collection,
+    deleteDoc,
+    doc,
+    onSnapshot,
+    updateDoc,
+} from "firebase/firestore";
 import { auth, db } from "../firebase-config";
 import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
 import Backdrop from "@mui/material/Backdrop";
@@ -44,7 +50,7 @@ function Tweet({
         await deleteDoc(targetTweetRef);
     };
 
-    // Comments Modal
+    // Comments Modal Style
     const style = {
         position: "absolute",
         top: "50%",
@@ -61,6 +67,23 @@ function Tweet({
         outline: "none",
         overflow: "auto",
     };
+
+    // Comments Firebase
+    const [comments, setComments] = useState([]);
+
+    const commentsCollectionRef = collection(db, "tweets", tweetId, "comments");
+
+    useEffect(() => {
+        const unsub = onSnapshot(commentsCollectionRef, (snapshot) => {
+            setComments(
+                snapshot.docs.map((comments) => ({
+                    ...comments.data(),
+                    id: comments.id,
+                }))
+            );
+        });
+        return unsub;
+    }, []);
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -222,6 +245,13 @@ function Tweet({
                                 }}
                             />
                         </Box>
+                        {comments.map((comment) => (
+                            <div key={comment.id}>
+                                <h3>{comment.id}</h3>
+                                <h3>{comment.author}</h3>
+                                <h3>{comment.text}</h3>
+                            </div>
+                        ))}
                         {/* Comments */}
                         <Comments />
                         <Comments />
