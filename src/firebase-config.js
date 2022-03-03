@@ -1,7 +1,13 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { addDoc, collection, getFirestore, getDocs } from "firebase/firestore";
+import {
+    addDoc,
+    collection,
+    getFirestore,
+    getDocs,
+    serverTimestamp,
+} from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -36,7 +42,10 @@ export const SignInWithGoogle = async () => {
     });
     if (registeredUsers.includes(auth.currentUser.email)) {
     } else {
-        await addDoc(usersCollectionRef, { user: auth.currentUser.email });
+        await addDoc(usersCollectionRef, {
+            user: auth.currentUser.email,
+            timestamp: serverTimestamp(),
+        });
     }
 };
 

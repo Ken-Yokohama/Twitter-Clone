@@ -49,7 +49,7 @@ function Sidebar(props) {
                     >
                         <TwitterIcon
                             className="sidebarIcon"
-                            sx={{ fontSize: "30px" }}
+                            sx={{ fontSize: "30px", color: "#1D9BF0" }}
                         />
                     </div>
                 </div>

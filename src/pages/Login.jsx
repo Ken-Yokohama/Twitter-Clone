@@ -3,7 +3,7 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
 } from "firebase/auth";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -61,6 +61,7 @@ export default function SignIn() {
             );
             await addDoc(usersCollectionRef, {
                 user: data.get("registerEmail"),
+                timestamp: serverTimestamp(),
             });
             // setRegisterError("");
             // setLoading(false);
