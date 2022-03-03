@@ -272,7 +272,11 @@ function Tweet({
                         </Box>
                         {/* Comments */}
                         {comments.map((comment) => (
-                            <Comments key={comment.id} comment={comment} />
+                            <Comments
+                                key={comment.id}
+                                comment={comment}
+                                tweetId={tweetId}
+                            />
                         ))}
                         {/* Comments Input */}
                         <Box

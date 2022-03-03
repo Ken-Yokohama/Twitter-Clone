@@ -1,16 +1,26 @@
 import { Avatar } from "@mui/material";
 import React, { useState } from "react";
-import { auth } from "../firebase-config";
+import { auth, db } from "../firebase-config";
 import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
+import { deleteDoc, doc } from "firebase/firestore";
 
-function Comments({ comment }) {
+function Comments({ comment, tweetId }) {
     const name = comment.author.substring(0, comment.author.lastIndexOf("@"));
     const date = comment.timestamp?.toDate()?.toDateString();
     const fullNameEmail = comment.author;
-    const tweetId = comment.id;
-    const tweetText = comment.text;
+    const commentId = comment.id;
+    const commentText = comment.text;
 
-    const handleDeleteButton = async () => {};
+    const handleDeleteButton = async () => {
+        const specificCommentRef = doc(
+            db,
+            "tweets",
+            tweetId,
+            "comments",
+            commentId
+        );
+        await deleteDoc(specificCommentRef);
+    };
 
     return (
         <div>
@@ -43,7 +53,7 @@ function Comments({ comment }) {
                                 fontSize="small"
                                 sx={{ cursor: "pointer" }}
                                 onClick={() => {
-                                    handleDeleteButton(tweetId);
+                                    handleDeleteButton(commentId);
                                 }}
                             />
                         )}
@@ -55,7 +65,7 @@ function Comments({ comment }) {
                             marginBottom: "0.5rem",
                         }}
                     >
-                        {tweetText}
+                        {commentText}
                     </h4>
                 </div>
             </div>

@@ -57,39 +57,59 @@ function TweetBox(props) {
 
         const tweetCollectionRef = collection(db, "tweets");
 
-        const storageRef = ref(
-            storage,
-            `/files/${auth?.currentUser?.email}/${file.name}`
-        );
-        const uploadTask = uploadBytesResumable(storageRef, file);
+        if (file) {
+            const storageRef = ref(
+                storage,
+                `/files/${auth?.currentUser?.email}/${file?.name}`
+            );
+            const uploadTask = uploadBytesResumable(storageRef, file);
 
-        const unsub = uploadTask.on(
-            "state_changed",
-            () => {},
-            (err) => {
-                setFileSelectError("Image Upload Failed");
-                setLoading(false);
-            },
-            async () => {
-                try {
-                    const url = await getDownloadURL(storageRef);
-                    await addDoc(tweetCollectionRef, {
-                        author: auth?.currentUser?.email,
-                        date: serverTimestamp(),
-                        imgSrc: url,
-                        likes: [],
-                        tweetText: tweetInput,
-                    });
-                    setTweetInput("");
-                    setFile(null);
+            const unsub = uploadTask.on(
+                "state_changed",
+                () => {},
+                (err) => {
+                    setFileSelectError("Image Upload Failed");
                     setLoading(false);
-                } catch (err) {
-                    setFileSelectError("Tweet Failed to Post Please Try Again");
-                    setLoading(false);
+                },
+                async () => {
+                    try {
+                        const url = await getDownloadURL(storageRef);
+                        await addDoc(tweetCollectionRef, {
+                            author: auth?.currentUser?.email,
+                            date: serverTimestamp(),
+                            imgSrc: url,
+                            likes: [],
+                            tweetText: tweetInput,
+                        });
+                        setTweetInput("");
+                        setFile(null);
+                        setLoading(false);
+                    } catch (err) {
+                        setFileSelectError(
+                            "Tweet Failed to Post Please Try Again"
+                        );
+                        setLoading(false);
+                    }
                 }
+            );
+            return unsub;
+        } else {
+            try {
+                await addDoc(tweetCollectionRef, {
+                    author: auth?.currentUser?.email,
+                    date: serverTimestamp(),
+                    imgSrc: "",
+                    likes: [],
+                    tweetText: tweetInput,
+                });
+                setTweetInput("");
+                setFile(null);
+                setLoading(false);
+            } catch (err) {
+                setFileSelectError("Tweet Failed to Post Please Try Again");
+                setLoading(false);
             }
-        );
-        return unsub;
+        }
     };
 
     return (
