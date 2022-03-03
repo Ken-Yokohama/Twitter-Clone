@@ -10,6 +10,8 @@ import {
     deleteDoc,
     doc,
     onSnapshot,
+    orderBy,
+    query,
     updateDoc,
 } from "firebase/firestore";
 import { auth, db } from "../firebase-config";
@@ -72,9 +74,13 @@ function Tweet({
     const [comments, setComments] = useState([]);
 
     const commentsCollectionRef = collection(db, "tweets", tweetId, "comments");
+    const commentsQuery = query(
+        commentsCollectionRef,
+        orderBy("timestamp", "asc")
+    );
 
     useEffect(() => {
-        const unsub = onSnapshot(commentsCollectionRef, (snapshot) => {
+        const unsub = onSnapshot(commentsQuery, (snapshot) => {
             setComments(
                 snapshot.docs.map((comments) => ({
                     ...comments.data(),
