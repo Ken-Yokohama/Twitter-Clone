@@ -32,9 +32,7 @@ function Chatroom1(props) {
             >
                 <h1>First Chat Data</h1>
                 {chat.map((chat) => (
-                    <div>
-                        <ChatData chat={chat} key={chat.id} />
-                    </div>
+                    <ChatData chat={chat} key={chat.id} />
                 ))}
                 <h1>Lastest Chat Data</h1>
             </div>

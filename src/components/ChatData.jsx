@@ -37,7 +37,10 @@ function ChatData({ chat }) {
                     >
                         <h3 style={{ fontWeight: "400" }}>{chat.text}</h3>
                     </Paper>
-                    <h6>{chat.author} - Test time</h6>
+                    <h6>
+                        {chat.author.substring(0, chat.author.lastIndexOf("@"))}{" "}
+                        - {chat.timestamp?.toDate()?.toLocaleString()}
+                    </h6>
                 </div>
             </div>
         </div>
