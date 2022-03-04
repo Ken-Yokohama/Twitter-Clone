@@ -1,12 +1,18 @@
 import { Paper } from "@mui/material";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function ChatRoomOptions({ chatRoomNumber, chatName, backgroundImg }) {
+function ChatRoomOptions({ chatRoomNumber, chatName, backgroundImg, route }) {
+    const navigate = useNavigate();
+
     return (
         <div
             style={{
                 backgroundImage: `url(${backgroundImg})`,
                 backgroundSize: "cover",
+            }}
+            onClick={() => {
+                navigate(route);
             }}
         >
             <Paper
