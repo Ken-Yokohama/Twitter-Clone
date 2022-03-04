@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Input } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 
-function ChatInput(props) {
+function ChatInput({ message, setMessage, sendMessage }) {
     return (
         <div
             style={{
@@ -14,7 +14,15 @@ function ChatInput(props) {
                 gap: "1rem",
             }}
         >
-            <Input placeholder="Type your message" fullWidth multiline />
+            <Input
+                placeholder="Type your message"
+                fullWidth
+                multiline
+                onChange={(e) => {
+                    setMessage(e.target.value);
+                }}
+                value={message}
+            />
             <div style={{ display: "flex", alignItems: "flex-end" }}>
                 <Button
                     variant="contained"
@@ -25,6 +33,7 @@ function ChatInput(props) {
                             backgroundColor: "#1a8cd8",
                         },
                     }}
+                    onClick={sendMessage}
                 >
                     Send
                 </Button>

@@ -1,7 +1,14 @@
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+    addDoc,
+    collection,
+    onSnapshot,
+    orderBy,
+    query,
+    serverTimestamp,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { ChatData, ChatInput } from "../components";
-import { db } from "../firebase-config";
+import { auth, db } from "../firebase-config";
 
 function Chatroom1(props) {
     const [chat, setChat] = useState([]);
@@ -19,6 +26,18 @@ function Chatroom1(props) {
         return unsub;
     }, []);
 
+    const [message, setMessage] = useState("");
+
+    const sendMessage = async () => {
+        setMessage("");
+        await addDoc(chatCollectionsRef, {
+            author: auth?.currentUser?.email,
+            text: message,
+            timestamp: serverTimestamp(),
+        });
+        window.scrollTo(0, document.body.scrollHeight);
+    };
+
     return (
         <>
             <div className="main-title">
@@ -31,14 +50,16 @@ function Chatroom1(props) {
                     flexDirection: "column",
                 }}
             >
-                <h1>First Chat Data</h1>
                 {chat.map((chat) => (
                     <ChatData chat={chat} key={chat.id} />
                 ))}
-                <h1>Lastest Chat Data</h1>
             </div>
 
-            <ChatInput />
+            <ChatInput
+                message={message}
+                setMessage={setMessage}
+                sendMessage={sendMessage}
+            />
         </>
     );
 }
