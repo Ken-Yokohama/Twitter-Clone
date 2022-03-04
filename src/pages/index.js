@@ -9,3 +9,7 @@ export { default as Profile } from "./Profile";
 export { default as Loading } from "./Loading";
 export { default as ExploreProfile } from "./ExploreProfile";
 export { default as LoadProfile } from "./LoadProfile";
+export { default as ChatRoom1 } from "./ChatRoom1";
+export { default as ChatRoom2 } from "./ChatRoom2";
+export { default as ChatRoom3 } from "./ChatRoom3";
+export { default as ChatHome } from "./ChatHome";
