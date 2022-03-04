@@ -21,8 +21,8 @@ function ChatRoom4(props) {
             setChat(
                 snapshot.docs.map((chat) => ({ ...chat.data(), id: chat.id }))
             );
+            window.scrollTo(0, document.body.scrollHeight);
         });
-        window.scrollTo(0, document.body.scrollHeight);
         return unsub;
     }, []);
 
