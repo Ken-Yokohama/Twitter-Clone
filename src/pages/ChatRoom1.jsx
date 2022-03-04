@@ -1,4 +1,4 @@
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { ChatData, ChatInput } from "../components";
 import { db } from "../firebase-config";
@@ -7,9 +7,10 @@ function Chatroom1(props) {
     const [chat, setChat] = useState([]);
 
     const chatCollectionsRef = collection(db, "chatroom1");
+    const q = query(chatCollectionsRef, orderBy("timestamp", "asc"));
 
     useEffect(() => {
-        const unsub = onSnapshot(chatCollectionsRef, (snapshot) => {
+        const unsub = onSnapshot(q, (snapshot) => {
             setChat(
                 snapshot.docs.map((chat) => ({ ...chat.data(), id: chat.id }))
             );
