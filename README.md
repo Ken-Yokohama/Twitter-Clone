@@ -48,3 +48,9 @@ V1.3 28 Feb '22 - Added Delete Functionality for Authenticated Users
 
 - Added CSS to display/hide tweet delete button based on user current user logged in
 - Added logic to delete tweet from firestore database when tweet delete button is pressed
+
+V1.4 2 Mar '22 - Added Widgets & Comments
+
+- Added Widgets into its own jsx to be more modular
+- Added logic to display the "comments modal" when comments of tweet is clicked
+- Added Comments section for modal to display comment data
