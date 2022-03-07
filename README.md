@@ -54,3 +54,26 @@ V1.4 2 Mar '22 - Added Widgets & Comments
 - Added Widgets into its own jsx to be more modular
 - Added logic to display the "comments modal" when comments of tweet is clicked
 - Added Comments section for modal to display comment data
+
+V1.5 3 Mar '22 - Added Tweet Comments & Search User Section
+
+- Added CSS for Comments modal
+- Created, Fetched & Handled Comment Data from Tweets Db
+- Added Query for Comments to be displayed in ascending order based on when it was commented
+- Added logic to comment/reply to a tweet and save into the Tweets Db
+- Fixed a bug where tweeting without a media file would create an undefinied media file in firebase storage
+- Added logic to let users delete their own comment if the authenticated user matches the comment user id
+- Added and Implemented react-copy-to-clipboard npm package to copy image url from the share menu
+- Added alerts for copying to clipboard and adding to bookmarks
+- Added logic to save tweets into a Bookmark Collection for each individual user
+- Moved userId to parent file to be more accessible throughout the branch
+- Refactored pull requests for Bookmarks
+- Added logic and CSS to display users Bookmarks Db
+- Added Remove Bookmark Button and Tooltip
+- Added Search Input and Dropdown Suggestions for Explore Section
+- Added Profile Navigation for each Registered User
+- Fixed Routing for Explore Section
+- Added CSS & Logic to the "Show More Tweets" button in the Explore Section
+- Added logic for Profile Searching
+- Added ToolTip for Tweet Delete Button
+- Fixed a bug where switching from one profile to another doesn't re-render the profile page
