@@ -3,7 +3,13 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
 } from "firebase/auth";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import {
+    addDoc,
+    collection,
+    doc,
+    serverTimestamp,
+    setDoc,
+} from "firebase/firestore";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -54,17 +60,20 @@ export default function SignIn() {
         setLoading(true);
         const data = new FormData(event.currentTarget);
         try {
-            await createUserWithEmailAndPassword(
+            const userCred = await createUserWithEmailAndPassword(
                 auth,
                 data.get("registerEmail"),
                 data.get("registerPassword")
             );
-            await addDoc(usersCollectionRef, {
+            const specificUserDoc = doc(db, "users", userCred?.user?.uid);
+            await setDoc(specificUserDoc, {
                 user: data.get("registerEmail"),
                 timestamp: serverTimestamp(),
             });
-            // setRegisterError("");
-            // setLoading(false);
+            // await addDoc(usersCollectionRef, {
+            //     user: data.get("registerEmail"),
+            //     timestamp: serverTimestamp(),
+            // });
         } catch (err) {
             setRegisterError(err.message);
             setLoading(false);
