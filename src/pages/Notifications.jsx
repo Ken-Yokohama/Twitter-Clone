@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase-config";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -8,8 +8,9 @@ function Notifications(props) {
 
     useEffect(async () => {
         const usersCollectionRef = collection(db, "users");
+        const q = query(usersCollectionRef, orderBy("timestamp", "desc"));
 
-        const registeredUsersData = await getDocs(usersCollectionRef);
+        const registeredUsersData = await getDocs(q);
         setRegisteredUsers(
             registeredUsersData.docs.map((users) => ({ ...users.data() }))
         );
