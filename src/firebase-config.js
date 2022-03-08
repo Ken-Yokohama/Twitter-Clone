@@ -7,6 +7,8 @@ import {
     getFirestore,
     getDocs,
     serverTimestamp,
+    doc,
+    setDoc,
 } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -34,7 +36,8 @@ export const db = getFirestore(app);
 const usersCollectionRef = collection(db, "users");
 
 export const SignInWithGoogle = async () => {
-    await signInWithPopup(auth, provider);
+    const userCred = await signInWithPopup(auth, provider);
+
     const registeredUsers = [];
     const data = await getDocs(usersCollectionRef);
     data.docs.map((user) => {
@@ -42,7 +45,8 @@ export const SignInWithGoogle = async () => {
     });
     if (registeredUsers.includes(auth.currentUser.email)) {
     } else {
-        await addDoc(usersCollectionRef, {
+        const specificUserDoc = doc(db, "users", userCred?.user?.uid);
+        await setDoc(specificUserDoc, {
             user: auth.currentUser.email,
             timestamp: serverTimestamp(),
         });
