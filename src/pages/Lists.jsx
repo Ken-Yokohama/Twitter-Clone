@@ -10,6 +10,8 @@ import {
     addDoc,
     collection,
     onSnapshot,
+    orderBy,
+    query,
     serverTimestamp,
 } from "firebase/firestore";
 import { auth, db } from "../firebase-config";
@@ -46,8 +48,10 @@ function Lists(props) {
 
     const [reminders, setReminders] = useState([]);
 
+    const q = query(usersListCollectionRef, orderBy("timestamp", "asc"));
+
     useEffect(() => {
-        const unsub = onSnapshot(usersListCollectionRef, (snapshot) => {
+        const unsub = onSnapshot(q, (snapshot) => {
             setReminders(
                 snapshot.docs.map((reminders) => ({
                     ...reminders.data(),
