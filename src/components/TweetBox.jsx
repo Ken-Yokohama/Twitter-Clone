@@ -89,6 +89,9 @@ function TweetBox(props) {
                             "Tweet Failed to Post Please Try Again"
                         );
                         setLoading(false);
+                        setTimeout(() => {
+                            setFileSelectError("");
+                        }, 3000);
                     }
                 }
             );
@@ -108,6 +111,9 @@ function TweetBox(props) {
             } catch (err) {
                 setFileSelectError("Tweet Failed to Post Please Try Again");
                 setLoading(false);
+                setTimeout(() => {
+                    setFileSelectError("");
+                }, 3000);
             }
         }
     };

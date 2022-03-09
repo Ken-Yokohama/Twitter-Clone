@@ -52,7 +52,9 @@ function Tweet({
             await updateDoc(targetTweetRef, { likes: newLikes });
         } else {
             const newLikes = [...likes, auth?.currentUser?.email];
-            await updateDoc(targetTweetRef, { likes: newLikes });
+            await updateDoc(targetTweetRef, {
+                likes: newLikes,
+            });
         }
     };
 
