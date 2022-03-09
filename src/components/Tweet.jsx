@@ -266,7 +266,7 @@ function Tweet({
                                     sx={{
                                         color: "#536471",
                                         color:
-                                            retweets.includes(
+                                            retweets?.includes(
                                                 auth?.currentUser?.email
                                             ) && "#00BA7C",
                                     }}
@@ -277,12 +277,12 @@ function Tweet({
                                 style={{
                                     fontWeight: "100",
                                     color:
-                                        retweets.includes(
+                                        retweets?.includes(
                                             auth?.currentUser?.email
                                         ) && "#00BA7C",
                                 }}
                             >
-                                {retweets.length}
+                                {retweets?.length}
                             </h5>
                         </div>
                         {/* Likes */}

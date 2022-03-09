@@ -105,7 +105,7 @@ function Lists(props) {
                         loadingPosition="end"
                         variant="contained"
                     >
-                        Send
+                        Add
                     </LoadingButton>
                 </Box>
             </Box>
