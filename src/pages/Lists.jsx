@@ -9,6 +9,8 @@ import { LoadingButton } from "@mui/lab";
 import {
     addDoc,
     collection,
+    deleteDoc,
+    doc,
     onSnapshot,
     orderBy,
     query,
@@ -48,7 +50,7 @@ function Lists(props) {
 
     const [reminders, setReminders] = useState([]);
 
-    const q = query(usersListCollectionRef, orderBy("timestamp", "asc"));
+    const q = query(usersListCollectionRef, orderBy("timestamp", "desc"));
 
     useEffect(() => {
         const unsub = onSnapshot(q, (snapshot) => {
@@ -61,6 +63,19 @@ function Lists(props) {
         });
         return unsub;
     }, []);
+
+    const handleClickReminder = async (id) => {
+        const specificReminder = doc(
+            db,
+            "users",
+            auth?.currentUser?.uid,
+            "lists",
+            id
+        );
+        setTimeout(async () => {
+            await deleteDoc(specificReminder);
+        }, 1000);
+    };
 
     return (
         <div>
@@ -100,6 +115,9 @@ function Lists(props) {
                         key={reminder.id}
                         control={<Checkbox />}
                         label={reminder.text}
+                        onClick={() => {
+                            handleClickReminder(reminder.id);
+                        }}
                     />
                 ))}
             </FormGroup>
