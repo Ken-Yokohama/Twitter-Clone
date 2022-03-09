@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import FormGroup from "@mui/material/FormGroup";
@@ -6,7 +6,12 @@ import Input from "@mui/material/Input";
 import { Box, FormHelperText } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { LoadingButton } from "@mui/lab";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import {
+    addDoc,
+    collection,
+    onSnapshot,
+    serverTimestamp,
+} from "firebase/firestore";
 import { auth, db } from "../firebase-config";
 
 function Lists(props) {
@@ -38,6 +43,20 @@ function Lists(props) {
             setLoading(false);
         }
     };
+
+    const [reminders, setReminders] = useState([]);
+
+    useEffect(() => {
+        const unsub = onSnapshot(usersListCollectionRef, (snapshot) => {
+            setReminders(
+                snapshot.docs.map((reminders) => ({
+                    ...reminders.data(),
+                    id: reminders.id,
+                }))
+            );
+        });
+        return unsub;
+    }, []);
 
     return (
         <div>
@@ -72,18 +91,13 @@ function Lists(props) {
                 </Box>
             </Box>
             <FormGroup sx={{ padding: "1rem" }}>
-                <FormControlLabel
-                    control={<Checkbox />}
-                    label="Things I have to Do"
-                />
-                <FormControlLabel
-                    control={<Checkbox />}
-                    label="Things I have to Do"
-                />
-                <FormControlLabel
-                    control={<Checkbox />}
-                    label="Things I have to Do"
-                />
+                {reminders.map((reminder) => (
+                    <FormControlLabel
+                        key={reminder.id}
+                        control={<Checkbox />}
+                        label={reminder.text}
+                    />
+                ))}
             </FormGroup>
         </div>
     );
