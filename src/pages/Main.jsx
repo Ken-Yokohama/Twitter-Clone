@@ -78,6 +78,7 @@ function Main(props) {
                     tweetText={tweet.tweetText}
                     imgSrc={tweet.imgSrc}
                     likes={tweet.likes}
+                    retweets={tweet.retweets}
                     setShowCopyToClipboardAlert={setShowCopyToClipboardAlert}
                     setShowAddToBookmarksAlert={setShowAddToBookmarksAlert}
                     registeredUsers={registeredUsers}

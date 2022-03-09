@@ -79,6 +79,7 @@ function TweetBox(props) {
                             date: serverTimestamp(),
                             imgSrc: url,
                             likes: [],
+                            retweets: [],
                             tweetText: tweetInput,
                         });
                         setTweetInput("");
@@ -103,6 +104,7 @@ function TweetBox(props) {
                     date: serverTimestamp(),
                     imgSrc: "",
                     likes: [],
+                    retweets: [],
                     tweetText: tweetInput,
                 });
                 setTweetInput("");

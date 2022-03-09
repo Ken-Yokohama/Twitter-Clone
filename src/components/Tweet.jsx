@@ -39,6 +39,7 @@ function Tweet({
     imgSrc,
     tweetText,
     likes,
+    retweets,
     setShowCopyToClipboardAlert,
     setShowAddToBookmarksAlert,
     registeredUsers,
@@ -54,6 +55,21 @@ function Tweet({
             const newLikes = [...likes, auth?.currentUser?.email];
             await updateDoc(targetTweetRef, {
                 likes: newLikes,
+            });
+        }
+    };
+
+    const handleRetweetButton = async () => {
+        const targetTweetRef = doc(db, "tweets", tweetId);
+        if (retweets.includes(auth?.currentUser?.email)) {
+            const newRetweets = retweets.filter((retweet) => {
+                return retweet != auth?.currentUser?.email;
+            });
+            await updateDoc(targetTweetRef, { retweets: newRetweets });
+        } else {
+            const newRetweets = [...retweets, auth?.currentUser?.email];
+            await updateDoc(targetTweetRef, {
+                retweets: newRetweets,
             });
         }
     };
@@ -240,19 +256,33 @@ function Tweet({
                             </h5>
                         </div>
                         {/* Retweets */}
-                        <div className="tweet-menu">
-                            {/* style={{display: "hidden"}} */}
+                        <div
+                            className="tweet-menu"
+                            onClick={handleRetweetButton}
+                        >
                             <div className="tweet-menu-icons">
                                 <AutorenewTwoToneIcon
                                     fontSize="small"
-                                    sx={{ color: "#536471" }}
+                                    sx={{
+                                        color: "#536471",
+                                        color:
+                                            retweets.includes(
+                                                auth?.currentUser?.email
+                                            ) && "#00BA7C",
+                                    }}
                                 />
                             </div>
                             <h5
                                 className="tweet-menu-count"
-                                style={{ fontWeight: "100" }}
+                                style={{
+                                    fontWeight: "100",
+                                    color:
+                                        retweets.includes(
+                                            auth?.currentUser?.email
+                                        ) && "#00BA7C",
+                                }}
                             >
-                                N/A
+                                {retweets.length}
                             </h5>
                         </div>
                         {/* Likes */}
