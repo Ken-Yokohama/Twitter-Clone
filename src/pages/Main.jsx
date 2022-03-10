@@ -63,7 +63,7 @@ function Main({ allUsers }) {
     return (
         <div>
             <TweetHeader />
-            <TweetBox />
+            <TweetBox allUsers={allUsers} />
             {tweets.map((tweet, index) => (
                 <Tweet
                     key={tweet.id}

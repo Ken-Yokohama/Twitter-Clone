@@ -65,7 +65,6 @@ function Sidebar({ allUsers }) {
     const id = open ? "simple-popover" : undefined;
 
     // Avatar
-
     const [avatarUrl, setAvatarUrl] = useState("");
 
     useEffect(() => {

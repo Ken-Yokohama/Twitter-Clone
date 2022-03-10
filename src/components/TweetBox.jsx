@@ -1,12 +1,12 @@
 import { LoadingButton } from "@mui/lab";
 import { Avatar, Box, Button, Input } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormHelperText from "@mui/material/FormHelperText";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { auth, db, storage } from "../firebase-config";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-function TweetBox(props) {
+function TweetBox({ allUsers }) {
     // Ref to File Input
     const hiddenFileInput = React.useRef(null);
 
@@ -120,6 +120,16 @@ function TweetBox(props) {
         }
     };
 
+    // Avatar
+    const [avatarUrl, setAvatarUrl] = useState("");
+
+    useEffect(() => {
+        allUsers.map((specificUser) => {
+            if (auth?.currentUser?.email == specificUser.user)
+                setAvatarUrl(specificUser.avatar);
+        });
+    }, [allUsers]);
+
     return (
         <div>
             <Box
@@ -129,7 +139,7 @@ function TweetBox(props) {
                     gap: "16px",
                 }}
             >
-                <Avatar sx={{ marginTop: "3px" }} />
+                <Avatar src={avatarUrl} sx={{ marginTop: "3px" }} />
                 <Box
                     sx={{
                         display: "flex",
