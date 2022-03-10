@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 import { Tweet } from "../components";
 import { db } from "../firebase-config";
 
-function ExploreProfile({ profileSearch, registeredUsers }) {
+function ExploreProfile({ profileSearch, registeredUsers, allUsers }) {
     const [tweets, setTweets] = useState([]);
 
     const [queryLimit, setQueryLimit] = useState(10);
@@ -61,6 +61,7 @@ function ExploreProfile({ profileSearch, registeredUsers }) {
                     setShowCopyToClipboardAlert={setShowCopyToClipboardAlert}
                     setShowAddToBookmarksAlert={setShowAddToBookmarksAlert}
                     registeredUsers={registeredUsers}
+                    allUsers={allUsers}
                 />
             ))}
 

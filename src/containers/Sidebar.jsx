@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { signOut } from "firebase/auth";
 import "./sidebar.css";
-import { auth } from "../firebase-config";
+import { auth, db } from "../firebase-config";
 
 import HomeIcon from "@mui/icons-material/Home";
 import TagIcon from "@mui/icons-material/Tag";
@@ -16,6 +16,33 @@ import { Button, Typography } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import Avatar from "@mui/material/Avatar";
 import Popover from "@mui/material/Popover";
+import { styled, Box } from "@mui/system";
+import ModalUnstyled from "@mui/base/ModalUnstyled";
+import TextField from "@mui/material/TextField";
+import { doc, updateDoc } from "firebase/firestore";
+
+const StyledModal = styled(ModalUnstyled)`
+    position: fixed;
+    z-index: 1300;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const Backdrop = styled("div")`
+    z-index: -1;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-tap-highlight-color: transparent;
+`;
 
 function Sidebar({ allUsers }) {
     const navigate = useNavigate();
@@ -37,6 +64,8 @@ function Sidebar({ allUsers }) {
     const open = Boolean(anchorEl);
     const id = open ? "simple-popover" : undefined;
 
+    // Avatar
+
     const [avatarUrl, setAvatarUrl] = useState("");
 
     useEffect(() => {
@@ -45,6 +74,26 @@ function Sidebar({ allUsers }) {
                 setAvatarUrl(specificUser.avatar);
         });
     }, [allUsers]);
+
+    // Update Profile Picture Modal
+    const [openModal, setopenModal] = useState(false);
+    const handleOpenModal = () => setopenModal(true);
+    const handleCloseModal = () => setopenModal(false);
+
+    const [profileImgUrl, setProfileImgUrl] = useState("");
+
+    const updateProfileImage = async () => {
+        const specificUserCollectionRef = doc(
+            db,
+            "users",
+            auth?.currentUser?.uid
+        );
+        await updateDoc(specificUserCollectionRef, {
+            avatar: profileImgUrl,
+        });
+        handleCloseModal();
+        window.location.reload();
+    };
 
     return (
         <div className="sidebar">
@@ -211,6 +260,14 @@ function Sidebar({ allUsers }) {
                 <Typography
                     sx={{ p: 2, cursor: "pointer" }}
                     className="sidebarOption"
+                    onClick={handleOpenModal}
+                    style={{ borderRadius: "0" }}
+                >
+                    Update Profile Picture
+                </Typography>
+                <Typography
+                    sx={{ p: 2, cursor: "pointer" }}
+                    className="sidebarOption"
                     onClick={logout}
                     style={{ borderRadius: "0" }}
                 >
@@ -245,6 +302,52 @@ function Sidebar({ allUsers }) {
                     </div>
                 </div>
                 <MoreHorizIcon />
+                {/* Modal Start */}
+                <StyledModal
+                    aria-labelledby="unstyled-modal-title"
+                    aria-describedby="unstyled-modal-description"
+                    open={openModal}
+                    onClose={handleCloseModal}
+                    BackdropComponent={Backdrop}
+                >
+                    <Box
+                        sx={{
+                            backgroundColor: "white",
+                            aspectRatio: "3/1",
+                            padding: "2rem",
+                            display: "flex",
+                            justifyContent: "center",
+                            flexDirection: "column",
+                        }}
+                    >
+                        <h2>Update Profile Image</h2>
+
+                        <Box
+                            sx={{
+                                gap: "1rem",
+                                display: "flex",
+                                flexDirection: "column",
+                            }}
+                        >
+                            <TextField
+                                id="standard-basic"
+                                label="Please Enter Image Url"
+                                variant="standard"
+                                fullWidth
+                                onChange={(e) => {
+                                    setProfileImgUrl(e.target.value);
+                                }}
+                            />
+                            <Button
+                                variant="outlined"
+                                onClick={updateProfileImage}
+                            >
+                                Add
+                            </Button>
+                        </Box>
+                    </Box>
+                </StyledModal>
+                {/* Modal End */}
             </div>
         </div>
     );

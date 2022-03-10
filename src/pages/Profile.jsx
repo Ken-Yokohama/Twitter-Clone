@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { ExploreProfile } from ".";
 import { auth, db } from "../firebase-config";
 
-function Profile(props) {
+function Profile({ allUsers }) {
     const { username } = useParams();
 
     const [registeredUsers, setRegisteredUsers] = useState([]);
@@ -27,6 +27,7 @@ function Profile(props) {
                 <h2>{username}'s Profile</h2>
             </div>
             <ExploreProfile
+                allUsers={allUsers}
                 profileSearch={username}
                 registeredUsers={registeredUsers}
             />

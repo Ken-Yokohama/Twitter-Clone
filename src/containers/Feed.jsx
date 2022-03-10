@@ -23,7 +23,10 @@ function Feed({ allUsers }) {
                 <Route path="/messages/*" element={<Messages />} />
                 <Route path="/bookmarks" element={<Bookmarks />} />
                 <Route path="/lists" element={<Lists />} />
-                <Route path="/profile/:username" element={<Profile />} />
+                <Route
+                    path="/profile/:username"
+                    element={<Profile allUsers={allUsers} />}
+                />
                 <Route path="/loadprofile" element={<LoadProfile />} />
             </Routes>
         </div>
