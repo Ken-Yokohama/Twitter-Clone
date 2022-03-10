@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { signOut } from "firebase/auth";
 import "./sidebar.css";
 import { auth } from "../firebase-config";
@@ -17,7 +17,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import Avatar from "@mui/material/Avatar";
 import Popover from "@mui/material/Popover";
 
-function Sidebar(props) {
+function Sidebar({ allUsers }) {
     const navigate = useNavigate();
 
     const logout = async () => {
@@ -36,6 +36,15 @@ function Sidebar(props) {
 
     const open = Boolean(anchorEl);
     const id = open ? "simple-popover" : undefined;
+
+    const [avatarUrl, setAvatarUrl] = useState("");
+
+    useEffect(() => {
+        allUsers.map((specificUser) => {
+            if (auth?.currentUser?.email == specificUser.user)
+                setAvatarUrl(specificUser.avatar);
+        });
+    }, [allUsers]);
 
     return (
         <div className="sidebar">
@@ -181,7 +190,7 @@ function Sidebar(props) {
                     className="sidebar-account"
                     style={{ padding: "1rem", marginBottom: "-0.5rem" }}
                 >
-                    <Avatar />
+                    <Avatar src={avatarUrl} />
                     <div
                         style={{
                             display: "flex",
@@ -214,7 +223,7 @@ function Sidebar(props) {
                 onClick={handlePopover}
             >
                 <div className="sidebar-account">
-                    <Avatar />
+                    <Avatar src={avatarUrl} />
                     <div
                         style={{
                             display: "flex",

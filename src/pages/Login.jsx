@@ -53,8 +53,6 @@ export default function SignIn() {
 
     const [loading, setLoading] = React.useState(false);
 
-    const usersCollectionRef = collection(db, "users");
-
     const registerEmail = async (event) => {
         event.preventDefault();
         setLoading(true);
@@ -69,11 +67,8 @@ export default function SignIn() {
             await setDoc(specificUserDoc, {
                 user: data.get("registerEmail"),
                 timestamp: serverTimestamp(),
+                avatar: "",
             });
-            // await addDoc(usersCollectionRef, {
-            //     user: data.get("registerEmail"),
-            //     timestamp: serverTimestamp(),
-            // });
         } catch (err) {
             setRegisterError(err.message);
             setLoading(false);

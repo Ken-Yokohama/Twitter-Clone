@@ -49,6 +49,7 @@ export const SignInWithGoogle = async () => {
         await setDoc(specificUserDoc, {
             user: auth.currentUser.email,
             timestamp: serverTimestamp(),
+            avatar: "",
         });
     }
 };
