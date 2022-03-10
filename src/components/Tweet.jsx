@@ -43,6 +43,7 @@ function Tweet({
     setShowCopyToClipboardAlert,
     setShowAddToBookmarksAlert,
     registeredUsers,
+    allUsers,
 }) {
     const handleLikeButton = async () => {
         const targetTweetRef = doc(db, "tweets", tweetId);
@@ -186,10 +187,21 @@ function Tweet({
         }, 3000);
     };
 
+    // Handle User Avatar
+
+    const [avatarUrl, setAvatarUrl] = useState("");
+
+    useEffect(() => {
+        allUsers.map((specificUser) => {
+            if (fullNameEmail == specificUser.user)
+                setAvatarUrl(specificUser.avatar);
+        });
+    }, [allUsers]);
+
     return (
         <div>
             <div style={{ display: "flex", padding: "1rem", gap: "1rem" }}>
-                <Avatar />
+                <Avatar src={avatarUrl} />
                 <div style={{ flex: "1" }}>
                     <div
                         style={{
@@ -409,7 +421,7 @@ function Tweet({
                                 gap: "16px",
                             }}
                         >
-                            <Avatar sx={{ marginTop: "3px" }} />
+                            <Avatar src={avatarUrl} sx={{ marginTop: "3px" }} />
                             <Box
                                 sx={{
                                     display: "flex",

@@ -13,7 +13,7 @@ import { Tweet, TweetBox, TweetHeader } from "../components";
 import { auth, db } from "../firebase-config";
 import Alert from "@mui/material/Alert";
 
-function Main(props) {
+function Main({ allUsers }) {
     const [tweets, setTweets] = useState([]);
 
     const [queryLimit, setQueryLimit] = useState(10);
@@ -82,6 +82,7 @@ function Main(props) {
                     setShowCopyToClipboardAlert={setShowCopyToClipboardAlert}
                     setShowAddToBookmarksAlert={setShowAddToBookmarksAlert}
                     registeredUsers={registeredUsers}
+                    allUsers={allUsers}
                 />
             ))}
             {/* Image Url Copied to Clipboard Alert */}

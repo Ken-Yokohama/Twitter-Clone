@@ -22,7 +22,7 @@ function Home(props) {
         <Container>
             <div className="home-container">
                 <Sidebar allUsers={allUsers} />
-                <Feed />
+                <Feed allUsers={allUsers} />
                 <WidgetSection />
             </div>
         </Container>

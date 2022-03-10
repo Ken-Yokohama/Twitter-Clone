@@ -13,11 +13,11 @@ import {
     Profile,
 } from "../pages";
 
-function Feed(props) {
+function Feed({ allUsers }) {
     return (
         <div>
             <Routes>
-                <Route path="/*" element={<Main />} />
+                <Route path="/*" element={<Main allUsers={allUsers} />} />
                 <Route path="/explore/*" element={<Explore />} />
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path="/messages/*" element={<Messages />} />
