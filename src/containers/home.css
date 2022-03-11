@@ -3,8 +3,9 @@
     grid-template-columns: 3fr 7fr 3fr;
 }
 
-/* Media Hidden */
+/* Media Controls */
 
+/* @1200px */
 .show-at-1200px {
     display: none;
 }
@@ -16,5 +17,26 @@
 
     .show-at-1200px {
         display: inline-block;
+    }
+
+    .home-container {
+        grid-template-columns: 0fr 7fr 3fr;
+    }
+
+    .sidebar {
+        width: 50px;
+        overflow-x: hidden;
+    }
+}
+
+/* @1000px */
+
+@media (max-width: 1000px) {
+    .hide-at-1000px {
+        display: none;
+    }
+
+    .home-container {
+        grid-template-columns: 0fr 7fr;
     }
 }

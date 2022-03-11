@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import "./widgetSection.css";
 import { Widgets } from ".";
+import { Box } from "@mui/material";
 
 function WidgetSection(props) {
     return (
-        <div
+        <Box
             className="widgetContainer"
-            style={{
+            sx={{
                 paddingLeft: "1rem",
                 paddingRight: "1rem",
                 display: "flex",
                 flexDirection: "column",
                 gap: "1rem",
+                "@media(max-width: 1000px)": {
+                    display: "none",
+                },
             }}
         >
             <h2 style={{ marginTop: "1rem" }}>
@@ -25,7 +29,7 @@ function WidgetSection(props) {
                 imageSrc="https://www.mediabistro.com/wp-content/uploads/2016/02/tips-on-getting-your-copywriter-portfolio-started.jpg"
                 projectLink="https://github.com/Ken-Yokohama/Twitter-Clone"
             />
-        </div>
+        </Box>
     );
 }
 
