@@ -80,6 +80,13 @@
     cursor: pointer;
 }
 
+@media (max-width: 1200px) {
+    .sidebar-profile-container {
+        width: 2.5rem;
+        aspect-ratio: 1/1;
+    }
+}
+
 .sidebar-account {
     display: flex;
 }

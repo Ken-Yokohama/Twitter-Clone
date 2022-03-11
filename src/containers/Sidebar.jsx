@@ -20,6 +20,7 @@ import { styled, Box } from "@mui/system";
 import ModalUnstyled from "@mui/base/ModalUnstyled";
 import TextField from "@mui/material/TextField";
 import { doc, updateDoc } from "firebase/firestore";
+import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
 
 const StyledModal = styled(ModalUnstyled)`
     position: fixed;
@@ -120,7 +121,7 @@ function Sidebar({ allUsers }) {
                 >
                     <div className="sidebarOption">
                         <HomeIcon className="sidebarIcon" />
-                        <h2>Home</h2>
+                        <h2 className="hide-at-1200px">Home</h2>
                     </div>
                 </NavLink>
                 <NavLink
@@ -133,7 +134,7 @@ function Sidebar({ allUsers }) {
                 >
                     <div className="sidebarOption">
                         <TagIcon className="sidebarIcon" />
-                        <h2>Explore</h2>
+                        <h2 className="hide-at-1200px">Explore</h2>
                     </div>
                 </NavLink>
                 <NavLink
@@ -146,7 +147,7 @@ function Sidebar({ allUsers }) {
                 >
                     <div className="sidebarOption">
                         <NotificationsIcon className="sidebarIcon" />
-                        <h2>Notifications</h2>
+                        <h2 className="hide-at-1200px">Notifications</h2>
                     </div>
                 </NavLink>
                 <NavLink
@@ -159,7 +160,7 @@ function Sidebar({ allUsers }) {
                 >
                     <div className="sidebarOption">
                         <MailOutlineIcon className="sidebarIcon" />
-                        <h2>Messages</h2>
+                        <h2 className="hide-at-1200px">Messages</h2>
                     </div>
                 </NavLink>
                 <NavLink
@@ -172,7 +173,7 @@ function Sidebar({ allUsers }) {
                 >
                     <div className="sidebarOption">
                         <BookmarkBorderIcon className="sidebarIcon" />
-                        <h2>Bookmarks</h2>
+                        <h2 className="hide-at-1200px">Bookmarks</h2>
                     </div>
                 </NavLink>
                 <NavLink
@@ -185,7 +186,7 @@ function Sidebar({ allUsers }) {
                 >
                     <div className="sidebarOption">
                         <ListAltIcon className="sidebarIcon" />
-                        <h2>Lists</h2>
+                        <h2 className="hide-at-1200px">Lists</h2>
                     </div>
                 </NavLink>
                 <NavLink
@@ -198,12 +199,11 @@ function Sidebar({ allUsers }) {
                 >
                     <div className="sidebarOption">
                         <PermIdentityIcon className="sidebarIcon" />
-                        <h2>Profile</h2>
+                        <h2 className="hide-at-1200px">Profile</h2>
                     </div>
                 </NavLink>
                 <Button
                     variant="contained"
-                    fullWidth
                     sx={{
                         borderRadius: "30px",
                         height: "50px",
@@ -211,12 +211,17 @@ function Sidebar({ allUsers }) {
                         "&:hover": {
                             backgroundColor: "#1a8cd8",
                         },
-                        "@media (min-width: 800px)": {
-                            display: "inline",
+                        "@media (max-width: 1200px)": {
+                            borderRadius: "5rem",
+                            width: "4rem",
+                            height: "4rem",
                         },
                     }}
                 >
-                    Tweet
+                    <div className="hide-at-1200px">Tweet</div>
+                    <div className="show-at-1200px">
+                        <HistoryEduIcon fontSize="large" />
+                    </div>
                 </Button>
             </div>
 
@@ -290,17 +295,26 @@ function Sidebar({ allUsers }) {
                             marginTop: "-0.5rem",
                         }}
                     >
-                        <h4>
+                        <h4 className="hide-at-1200px">
                             {auth?.currentUser?.email.substring(0, 12)}
                             {auth?.currentUser?.email.length > 12 && "..."}
                         </h4>
-                        <h5 style={{ fontWeight: "400" }}>
+                        <h5
+                            className="hide-at-1200px"
+                            style={{ fontWeight: "400" }}
+                        >
                             @{auth?.currentUser?.email.substring(0, 12)}
                             {auth?.currentUser?.email.length > 12 && "..."}
                         </h5>
                     </div>
                 </div>
-                <MoreHorizIcon />
+                <MoreHorizIcon
+                    sx={{
+                        "@media (max-width: 1200px)": {
+                            display: "none",
+                        },
+                    }}
+                />
                 {/* Modal Start */}
                 <StyledModal
                     aria-labelledby="unstyled-modal-title"

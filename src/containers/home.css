@@ -2,3 +2,19 @@
     display: grid;
     grid-template-columns: 3fr 7fr 3fr;
 }
+
+/* Media Hidden */
+
+.show-at-1200px {
+    display: none;
+}
+
+@media (max-width: 1200px) {
+    .hide-at-1200px {
+        display: none;
+    }
+
+    .show-at-1200px {
+        display: inline-block;
+    }
+}
