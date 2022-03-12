@@ -211,7 +211,7 @@ function Tweet({
                         }}
                     >
                         <div style={{ display: "flex" }}>
-                            <h3 className="tweet-author-responsive">
+                            <h3 style={{ wordBreak: "break-word" }}>
                                 {name}@
                                 <span style={{ fontWeight: "400" }}>
                                     {name} · {date}

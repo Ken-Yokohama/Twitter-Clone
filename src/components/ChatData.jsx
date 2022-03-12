@@ -35,7 +35,14 @@ function ChatData({ chat }) {
                             padding: "0.75rem",
                         }}
                     >
-                        <h3 style={{ fontWeight: "400" }}>{chat?.text}</h3>
+                        <h3
+                            style={{
+                                fontWeight: "400",
+                                wordBreak: "break-word",
+                            }}
+                        >
+                            {chat?.text}
+                        </h3>
                     </Paper>
                     <h6>
                         {chat?.author?.substring(

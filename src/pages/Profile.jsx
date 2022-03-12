@@ -24,7 +24,7 @@ function Profile({ allUsers }) {
     return (
         <div>
             <div className="main-title">
-                <h2>{username}'s Profile</h2>
+                <h2 style={{ wordBreak: "break-all" }}>{username}'s Profile</h2>
             </div>
             <ExploreProfile
                 allUsers={allUsers}

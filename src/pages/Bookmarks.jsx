@@ -75,7 +75,7 @@ function Bookmarks({}) {
                                 alignItems: "center",
                             }}
                         >
-                            <h3 className="tweet-author-responsive">
+                            <h3 style={{ wordBreak: "break-word" }}>
                                 {bookmark.author.substring(
                                     0,
                                     bookmark.author.lastIndexOf("@")
