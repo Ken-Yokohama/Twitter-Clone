@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import React, { useState } from "react";
 import { ChatRoomOptions } from "../components";
 
@@ -7,12 +8,15 @@ function ChatHome(props) {
             <div className="main-title">
                 <h2>Chat Rooms</h2>
             </div>
-            <div
-                style={{
+            <Box
+                sx={{
                     padding: "1rem",
                     gap: "1rem",
                     display: "grid",
                     gridTemplateColumns: "1fr 1fr",
+                    "@media(max-width: 600px)": {
+                        gridTemplateColumns: "1fr",
+                    },
                 }}
             >
                 <ChatRoomOptions
@@ -39,7 +43,7 @@ function ChatHome(props) {
                     backgroundImg="https://static01.nyt.com/images/2017/11/26/arts/26comedycrash-illo/26comedycrash-illo-jumbo.gif"
                     route="/messages/chatroom4"
                 />
-            </div>
+            </Box>
         </>
     );
 }
