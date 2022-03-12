@@ -75,22 +75,24 @@ function Bookmarks({}) {
                                 alignItems: "center",
                             }}
                         >
-                            <div style={{ display: "flex" }}>
-                                <h3>
-                                    {bookmark.author.substring(
-                                        0,
-                                        bookmark.author.lastIndexOf("@")
-                                    )}
-                                </h3>
-                                <h3 style={{ fontWeight: "400" }}>
+                            <h3 className="tweet-author-responsive">
+                                {bookmark.author.substring(
+                                    0,
+                                    bookmark.author.lastIndexOf("@")
+                                )}
+                                <span
+                                    style={{
+                                        fontWeight: "400",
+                                    }}
+                                >
                                     @
                                     {bookmark.author.substring(
                                         0,
                                         bookmark.author.lastIndexOf("@")
                                     )}{" "}
                                     · {bookmark.date}
-                                </h3>
-                            </div>
+                                </span>
+                            </h3>
                             <Tooltip title="Remove Bookmark">
                                 <BookmarkRemoveIcon
                                     fontSize="small"
