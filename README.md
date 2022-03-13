@@ -77,3 +77,13 @@ V1.5 3 Mar '22 - Added Tweet Comments & Search User Section
 - Added logic for Profile Searching
 - Added ToolTip for Tweet Delete Button
 - Fixed a bug where switching from one profile to another doesn't re-render the profile page
+
+V1.6 3 Mar '22 - Added Tweet Comments & Search User Section
+- Added Newly Created Users in the Notifications Section
+- Added CSS and Routing for Chat Rooms
+- Added Chat Box CSS
+- Added CSS for Chat Messages
+- Fixed CSS to display dates more cleanly using localeTimeString
+- Added Queries to sort the chatroom by latest message
+- Added Database for ChatRooms 1,2,3 & 4
+- Fixed a Bug where entering a Chat Room doesn't scroll down to the bottom of the chat
