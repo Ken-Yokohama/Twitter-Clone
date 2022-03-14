@@ -93,7 +93,7 @@ function Sidebar({ allUsers }) {
             avatar: profileImgUrl,
         });
         handleCloseModal();
-        window.location.href = "https://ken-yokohama.github.io/Twitter-Clone/";
+        window.location.reload();
     };
 
     return (
