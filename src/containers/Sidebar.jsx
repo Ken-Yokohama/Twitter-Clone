@@ -21,6 +21,7 @@ import ModalUnstyled from "@mui/base/ModalUnstyled";
 import TextField from "@mui/material/TextField";
 import { doc, updateDoc } from "firebase/firestore";
 import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
+import Tooltip from "@mui/material/Tooltip";
 
 const StyledModal = styled(ModalUnstyled)`
     position: fixed;
@@ -202,30 +203,32 @@ function Sidebar({ allUsers }) {
                         <h2 className="hide-at-1200px">Profile</h2>
                     </div>
                 </NavLink>
-                <Button
-                    variant="contained"
-                    sx={{
-                        borderRadius: "30px",
-                        height: "50px",
-                        backgroundColor: "#1d9bf0",
-                        "&:hover": {
-                            backgroundColor: "#1a8cd8",
-                        },
-                        "@media (max-width: 1200px)": {
-                            borderRadius: "5rem",
-                            width: "4rem",
-                            height: "4rem",
-                        },
-                    }}
-                    onClick={() => {
-                        navigate("/");
-                    }}
-                >
-                    <div className="hide-at-1200px">Tweet</div>
-                    <div className="show-at-1200px">
-                        <HistoryEduIcon fontSize="large" />
-                    </div>
-                </Button>
+                <Tooltip title="Tweet Page">
+                    <Button
+                        variant="contained"
+                        sx={{
+                            borderRadius: "30px",
+                            height: "50px",
+                            backgroundColor: "#1d9bf0",
+                            "&:hover": {
+                                backgroundColor: "#1a8cd8",
+                            },
+                            "@media (max-width: 1200px)": {
+                                borderRadius: "5rem",
+                                width: "4rem",
+                                height: "4rem",
+                            },
+                        }}
+                        onClick={() => {
+                            navigate("/");
+                        }}
+                    >
+                        <div className="hide-at-1200px">Tweet</div>
+                        <div className="show-at-1200px">
+                            <HistoryEduIcon fontSize="large" />
+                        </div>
+                    </Button>
+                </Tooltip>
             </div>
 
             <Popover
