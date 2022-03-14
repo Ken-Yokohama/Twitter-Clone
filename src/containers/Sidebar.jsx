@@ -217,6 +217,9 @@ function Sidebar({ allUsers }) {
                             height: "4rem",
                         },
                     }}
+                    onClick={() => {
+                        navigate("/");
+                    }}
                 >
                     <div className="hide-at-1200px">Tweet</div>
                     <div className="show-at-1200px">
