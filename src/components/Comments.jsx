@@ -34,18 +34,18 @@ function Comments({ comment, tweetId }) {
                             alignItems: "center",
                         }}
                     >
-                        <div style={{ display: "flex" }}>
-                            <h3>
+                        <div>
+                            <h3 style={{ wordBreak: "break-word" }}>
                                 {name.length > 13
                                     ? name.substring(0, 13) + "..."
                                     : name}
-                            </h3>
-                            <h3 style={{ fontWeight: "400" }}>
-                                @
-                                {name.length > 13
-                                    ? name.substring(0, 13) + "..."
-                                    : name}{" "}
-                                · {date}
+                                <span style={{ fontWeight: "400" }}>
+                                    @
+                                    {name.length > 13
+                                        ? name.substring(0, 13) + "..."
+                                        : name}{" "}
+                                    · {date}
+                                </span>
                             </h3>
                         </div>
                         {auth?.currentUser?.email == fullNameEmail && (

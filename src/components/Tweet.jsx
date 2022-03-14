@@ -88,7 +88,6 @@ function Tweet({
         transform: "translate(-50%, -50%)",
         display: "flex",
         flexDirection: "column",
-        width: 600,
         height: "70%",
         bgcolor: "background.paper",
         boxShadow: 24,
