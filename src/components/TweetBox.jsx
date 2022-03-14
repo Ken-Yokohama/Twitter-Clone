@@ -2,9 +2,17 @@ import { LoadingButton } from "@mui/lab";
 import { Avatar, Box, Button, Input } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import FormHelperText from "@mui/material/FormHelperText";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import {
+    addDoc,
+    collection,
+    serverTimestamp,
+    setDoc,
+    doc,
+} from "firebase/firestore";
 import { auth, db, storage } from "../firebase-config";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+const Filter = require("bad-words");
+const filter = new Filter();
 
 function TweetBox({ allUsers }) {
     // Ref to File Input
@@ -57,6 +65,10 @@ function TweetBox({ allUsers }) {
 
         const tweetCollectionRef = collection(db, "tweets");
 
+        const filteredTweet = filter.isProfane(tweetInput)
+            ? "I Got Banned for Saying: " + filter.clean(tweetInput)
+            : tweetInput;
+
         if (file) {
             const storageRef = ref(
                 storage,
@@ -80,11 +92,28 @@ function TweetBox({ allUsers }) {
                             imgSrc: url,
                             likes: [],
                             retweets: [],
-                            tweetText: tweetInput,
+                            tweetText: filteredTweet,
                         });
                         setTweetInput("");
                         setFile(null);
                         setLoading(false);
+                        // Ban User
+                        if (filter.isProfane(tweetInput)) {
+                            const specificBanDoc = doc(
+                                db,
+                                "banned",
+                                auth?.currentUser?.uid
+                            );
+                            try {
+                                await setDoc(specificBanDoc, {
+                                    email: auth?.currentUser?.email,
+                                    uid: auth?.currentUser?.uid,
+                                    timestamp: serverTimestamp(),
+                                });
+                            } catch (err) {
+                                setLoading(false);
+                            }
+                        }
                     } catch (err) {
                         setFileSelectError(
                             "Tweet Failed to Post Please Try Again"
@@ -105,11 +134,28 @@ function TweetBox({ allUsers }) {
                     imgSrc: "",
                     likes: [],
                     retweets: [],
-                    tweetText: tweetInput,
+                    tweetText: filteredTweet,
                 });
                 setTweetInput("");
                 setFile(null);
                 setLoading(false);
+                // Ban User
+                if (filter.isProfane(tweetInput)) {
+                    const specificBanDoc = doc(
+                        db,
+                        "banned",
+                        auth?.currentUser?.uid
+                    );
+                    try {
+                        await setDoc(specificBanDoc, {
+                            email: auth?.currentUser?.email,
+                            uid: auth?.currentUser?.uid,
+                            timestamp: serverTimestamp(),
+                        });
+                    } catch (err) {
+                        setLoading(false);
+                    }
+                }
             } catch (err) {
                 setFileSelectError("Tweet Failed to Post Please Try Again");
                 setLoading(false);
