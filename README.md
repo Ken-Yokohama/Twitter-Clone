@@ -22,6 +22,18 @@ Twitter Clone is a full-stack social media web application similar to the popula
 - Saved Bookmarks
 - Reminders & To-Do Lists
 
+### Technologies & Templates Used
+| Technologies | Usage                                      |
+| ----------------- | ------------------------------------------------ |
+| React Router Dom | Navigation & Routing |
+| Material UI | CSS Components, Styles & Icons       |
+| Firebase Google Authentication      | Login & Authentication      |
+| Firebase Firestore     | Real Time Database      |
+| Firebase Storage     | File Storage      |
+| React Bad-Words | Profanity Filering |
+| React Copy-To-Clipboard | onClick Copy Paste |
+| Npm GH-Pages | Web Hosting |
+
 ### Version Logs
 V1.0 24 Feb '22 - Original Release
 
