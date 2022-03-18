@@ -87,3 +87,12 @@ V1.6 3 Mar '22 - Added Tweet Comments & Search User Section
 - Added Queries to sort the chatroom by latest message
 - Added Database for ChatRooms 1,2,3 & 4
 - Fixed a Bug where entering a Chat Room doesn't scroll down to the bottom of the chat
+
+V1.7 4 Mar '22 - Added Chat Rooms and Notification Section
+- Added a Notifications Section which displays Newly Created Users
+- Added CSS Styles and Routes for Chat Rooms
+- Added Conditional CSS for Chat Messages
+- Refactored CSS to display shorthand dates using localeTimeString
+- Added query to sort chatroom messages by latest message
+- Added database for Chat Rooms 1, 2, 3 & 4
+- Fixed a bug where entering a chat room doesn't scroll to the bottom of the chat
