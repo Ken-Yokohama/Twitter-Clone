@@ -12,6 +12,16 @@ Twitter Clone is a full-stack social media web application similar to the popula
 <!-- Add Cover After Portfolio Image is Updated -->
 <!-- ![Twitter Clone Cover Sample](https://github.com/Ken-Yokohama/Twitter-Clone/blob/master/public/twitter-clone-logo.jpg?raw=true) -->
 
+### Features:
+- Email and Token Based User Authentication
+- Read, Write, Update and Delete Security Rules
+- Profanity Filtering and Banned User Limits
+- User Profile Information w/ Profile Avatar
+- Search Query and filtering
+- Global Chat Rooms
+- Saved Bookmarks
+- Reminders & To-Do Lists
+
 ### Version Logs
 V1.0 24 Feb '22 - Original Release
 
