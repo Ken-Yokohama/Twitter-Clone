@@ -109,3 +109,11 @@ V1.9 9 Mar '22 - Added Lists Section
 - Added Query to order the reminder list by date added
 - Added DB for Retweet Button
 - Fixed a bug where the explore page threw an error due to the retweets not being assigned
+
+V1.10 10 Mar '22 - Added User Profile Pictures/Avatars
+- Added Profile Pictures to each User in the Users DB
+- Added Modal to Update Pofile Pictures
+- Added User Profile Picture to Sidebar
+- Added User Profile Picture to Each Tweet
+- Added User Profile Picture in TweetBox- 
+- Added Security Rules to Firestore DB to only allow updates on Profile Pictures of their own Profile
