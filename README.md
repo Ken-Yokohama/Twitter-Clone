@@ -121,3 +121,8 @@ V1.10 10 Mar '22 - Added User Profile Pictures/Avatars
 V1.11 11 Mar '22 - Added Responsiveness part 1
 - Converted the Sidebar Options to be Mobile Responsive
 - Converted each Tweet to be Mobile Responsive 
+
+V1.12 12 Mar '22 - Added Responsiveness part 2
+- Converted Tweet Header and Page Headers to be Mobile Responsive
+- Converted the Chat Home Page to be Mobile Responsive
+- Converted the text inside tweets to be Mobile Responsive using wordBreak
