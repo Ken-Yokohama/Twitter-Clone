@@ -101,3 +101,11 @@ V1.8 8 Mar '22 - Refactoring Registered User Data
 - Refactored the SignInWithGoogle function to store the UID of New Users as the Document ID for easier data parsing
 - Refactored the Register User with Email function to the store the UID of New Users as the Document ID for easier data parsing
 - Added Queries to sort the Registered Users based on date created
+
+V1.9 9 Mar '22 - Added Lists Section
+- Added CSS Styling for Lists Section
+- Created CRUD functions for Reminders List
+- Added Firebase Security Rules to Scope Users CRUD functions only to the Reminders List of their own Profile
+- Added Query to order the reminder list by date added
+- Added DB for Retweet Button
+- Fixed a bug where the explore page threw an error due to the retweets not being assigned
