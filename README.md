@@ -1,5 +1,16 @@
 # Twitter-Clone
+Full Stack Twitter Clone using React & Firebase
 
+![Twitter Clone Logo](https://github.com/Ken-Yokohama/Twitter-Clone/blob/master/public/twitter-clone-logo.jpg?raw=true)
+
+### Brief Summary
+Twitter Clone is a full-stack social media web application similar to the popular website [Twitter](https://twitter.com/) created using React in the FrontEnd and Firebase to handle the Database, Authentication & Security. Here, users are able to post tweets, post media, comment, like, retweet, bookmark, chat, search, share as well as user specific services such as authentication and profile information updates. 
+
+### Links:
+- [Live Preview](https://ken-yokohama.github.io/Twitter-Clone)
+
+<!-- Add Cover After Portfolio Image is Updated -->
+<!-- ![Twitter Clone Cover Sample](https://github.com/Ken-Yokohama/Twitter-Clone/blob/master/public/twitter-clone-logo.jpg?raw=true) -->
 
 ### Version Logs
 V1.0 24 Feb '22 - Original Release
