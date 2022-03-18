@@ -117,3 +117,7 @@ V1.10 10 Mar '22 - Added User Profile Pictures/Avatars
 - Added User Profile Picture to Each Tweet
 - Added User Profile Picture in TweetBox- 
 - Added Security Rules to Firestore DB to only allow updates on Profile Pictures of their own Profile
+
+V1.11 11 Mar '22 - Added Responsiveness part 1
+- Converted the Sidebar Options to be Mobile Responsive
+- Converted each Tweet to be Mobile Responsive 
