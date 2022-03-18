@@ -34,6 +34,16 @@ Twitter Clone is a full-stack social media web application similar to the popula
 | React Copy-To-Clipboard | onClick Copy Paste |
 | Npm GH-Pages | Web Hosting |
 
+### How to run locally
+```
+git clone https://github.com/Ken-Yokohama/Twitter-Clone.git
+
+cd Twitter-Clone
+npm start
+```
+
+**Note You'll have to create your own firebase project and paste your project API Keys into a .env file to be able to use your own personal version of this twitter clone
+
 ### Version Logs
 V1.0 24 Feb '22 - Original Release
 
