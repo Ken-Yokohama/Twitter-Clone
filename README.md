@@ -126,3 +126,13 @@ V1.12 12 Mar '22 - Added Responsiveness part 2
 - Converted Tweet Header and Page Headers to be Mobile Responsive
 - Converted the Chat Home Page to be Mobile Responsive
 - Converted the text inside tweets to be Mobile Responsive using wordBreak
+
+V1.13 14 Mar '22 - Added Profanity Filter, Banned Users & Additional Responsiveness (LIVE DEPLOYMENT DATE)
+- Added Profanity Filter using npm bad-words
+- Added Banned Users DB
+- Converted Comments to be Mobile Responsive
+- Converted Notifications Section to be Mobile Responsive
+- Added Navigation for Tweet Button w/ ToolTip
+- Refactored Window Refresh when changing profile picture
+- Fixed a bug where routing doesn't properly work, to fix this I used HashRouter instead of BrowserRouter
+- LIVE DEPLOYMENT
