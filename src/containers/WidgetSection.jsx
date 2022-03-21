@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./widgetSection.css";
 import { Widgets } from ".";
 import { Box } from "@mui/material";
+import portfolioImg from "../images/portfolio.JPG";
 
 function WidgetSection(props) {
     return (
@@ -26,8 +27,8 @@ function WidgetSection(props) {
             </h3>
             <Widgets
                 projectName="Ken Yokohama - Portfolio"
-                imageSrc="https://www.mediabistro.com/wp-content/uploads/2016/02/tips-on-getting-your-copywriter-portfolio-started.jpg"
-                projectLink="https://github.com/Ken-Yokohama/Twitter-Clone"
+                imageSrc={portfolioImg}
+                projectLink="https://github.com/Ken-Yokohama"
             />
         </Box>
     );
