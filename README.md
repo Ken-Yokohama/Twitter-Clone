@@ -1,5 +1,48 @@
 # Twitter-Clone
+Full Stack Twitter Clone using React & Firebase
 
+![Twitter Clone Logo](https://github.com/Ken-Yokohama/Twitter-Clone/blob/master/public/twitter-clone-logo.jpg?raw=true)
+
+### Brief Summary
+Twitter Clone is a full-stack social media web application similar to the popular website [Twitter](https://twitter.com/) created using React in the FrontEnd and Firebase to handle the Database, Authentication & Security. Here, users are able to post tweets, post media, comment, like, retweet, bookmark, chat, search, share as well as user specific services such as authentication and profile information updates. 
+
+### Links:
+- [Live Preview](https://ken-yokohama.github.io/Twitter-Clone)
+
+<!-- Add Cover After Portfolio Image is Updated -->
+<!-- ![Twitter Clone Cover Sample](https://github.com/Ken-Yokohama/Twitter-Clone/blob/master/public/twitter-clone-logo.jpg?raw=true) -->
+
+### Features:
+- Email and Token Based User Authentication
+- Read, Write, Update and Delete Security Rules
+- Profanity Filtering and Banned User Limits
+- User Profile Information w/ Profile Avatar
+- Search Query and filtering
+- Global Chat Rooms
+- Saved Bookmarks
+- Reminders & To-Do Lists
+
+### Technologies & Templates Used
+| Technologies | Usage                                      |
+| ----------------- | ------------------------------------------------ |
+| React Router Dom | Navigation & Routing |
+| Material UI | CSS Components, Styles & Icons       |
+| Firebase Google Authentication      | Login & Authentication      |
+| Firebase Firestore     | Real Time Database      |
+| Firebase Storage     | File Storage      |
+| React Bad-Words | Profanity Filering |
+| React Copy-To-Clipboard | onClick Copy Paste |
+| Npm GH-Pages | Web Hosting |
+
+### How to run locally
+```
+git clone https://github.com/Ken-Yokohama/Twitter-Clone.git
+
+cd Twitter-Clone
+npm start
+```
+
+**Note You'll have to create your own firebase project and paste your project API Keys into a .env file to be able to use your own personal version of this twitter clone
 
 ### Version Logs
 V1.0 24 Feb '22 - Original Release
@@ -87,3 +130,52 @@ V1.6 3 Mar '22 - Added Tweet Comments & Search User Section
 - Added Queries to sort the chatroom by latest message
 - Added Database for ChatRooms 1,2,3 & 4
 - Fixed a Bug where entering a Chat Room doesn't scroll down to the bottom of the chat
+
+V1.7 4 Mar '22 - Added Chat Rooms and Notification Section
+- Added a Notifications Section which displays Newly Created Users
+- Added CSS Styles and Routes for Chat Rooms
+- Added Conditional CSS for Chat Messages
+- Refactored CSS to display shorthand dates using localeTimeString
+- Added query to sort chatroom messages by latest message
+- Added database for Chat Rooms 1, 2, 3 & 4
+- Fixed a bug where entering a chat room doesn't scroll to the bottom of the chat
+
+V1.8 8 Mar '22 - Refactoring Registered User Data
+- Refactored the SignInWithGoogle function to store the UID of New Users as the Document ID for easier data parsing
+- Refactored the Register User with Email function to the store the UID of New Users as the Document ID for easier data parsing
+- Added Queries to sort the Registered Users based on date created
+
+V1.9 9 Mar '22 - Added Lists Section
+- Added CSS Styling for Lists Section
+- Created CRUD functions for Reminders List
+- Added Firebase Security Rules to Scope Users CRUD functions only to the Reminders List of their own Profile
+- Added Query to order the reminder list by date added
+- Added DB for Retweet Button
+- Fixed a bug where the explore page threw an error due to the retweets not being assigned
+
+V1.10 10 Mar '22 - Added User Profile Pictures/Avatars
+- Added Profile Pictures to each User in the Users DB
+- Added Modal to Update Pofile Pictures
+- Added User Profile Picture to Sidebar
+- Added User Profile Picture to Each Tweet
+- Added User Profile Picture in TweetBox- 
+- Added Security Rules to Firestore DB to only allow updates on Profile Pictures of their own Profile
+
+V1.11 11 Mar '22 - Added Responsiveness part 1
+- Converted the Sidebar Options to be Mobile Responsive
+- Converted each Tweet to be Mobile Responsive 
+
+V1.12 12 Mar '22 - Added Responsiveness part 2
+- Converted Tweet Header and Page Headers to be Mobile Responsive
+- Converted the Chat Home Page to be Mobile Responsive
+- Converted the text inside tweets to be Mobile Responsive using wordBreak
+
+V1.13 14 Mar '22 - Added Profanity Filter, Banned Users & Additional Responsiveness (LIVE DEPLOYMENT DATE)
+- Added Profanity Filter using npm bad-words
+- Added Banned Users DB
+- Converted Comments to be Mobile Responsive
+- Converted Notifications Section to be Mobile Responsive
+- Added Navigation for Tweet Button w/ ToolTip
+- Refactored Window Refresh when changing profile picture
+- Fixed a bug where routing doesn't properly work, to fix this I used HashRouter instead of BrowserRouter
+- LIVE DEPLOYMENT
