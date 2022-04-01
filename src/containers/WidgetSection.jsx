@@ -3,6 +3,7 @@ import "./widgetSection.css";
 import { Widgets } from ".";
 import { Box } from "@mui/material";
 import portfolioImg from "../images/portfolio.JPG";
+import kaChatImg from "../images/ka-chat.JPG";
 
 function WidgetSection(props) {
     return (
@@ -26,9 +27,14 @@ function WidgetSection(props) {
                 Please feel free to view my other projects:
             </h3>
             <Widgets
-                projectName="Ken Yokohama - Portfolio"
+                projectName="Portfolio"
                 imageSrc={portfolioImg}
-                projectLink="https://github.com/Ken-Yokohama"
+                projectLink="https://kenyokohama.com/"
+            />
+            <Widgets
+                projectName="Ka-Chat!"
+                imageSrc={kaChatImg}
+                projectLink="https://ken-yokohama.github.io/Ka-Chat"
             />
         </Box>
     );
