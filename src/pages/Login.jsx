@@ -36,7 +36,7 @@ function Copyright(props) {
             {...props}
         >
             {"Copyright © "}
-            <Link color="inherit" href="https://github.com/Ken-Yokohama">
+            <Link color="inherit" href="https://kenyokohama.com">
                 kenyokohama.com
             </Link>{" "}
             {new Date().getFullYear()}
@@ -101,170 +101,193 @@ export default function SignIn() {
     };
 
     return (
-        <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
-
-                {/* Login Page */}
-                {toggleLogin && (
-                    <Paper
-                        elevation={10}
-                        sx={{ padding: "30px", marginTop: "64px" }}
-                    >
-                        <Box
-                            sx={{
-                                display: "flex",
-                                flexDirection: "column",
-                                alignItems: "center",
-                            }}
+        <div
+            style={{
+                backgroundImage:
+                    "url(/Twitter-Clone/images/login-background.jpg)",
+                height: "100vh",
+                backgroundSize: "cover",
+            }}
+        >
+            <ThemeProvider theme={theme}>
+                <Container
+                    component="main"
+                    maxWidth="xs"
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        height: "100%",
+                    }}
+                >
+                    <CssBaseline />
+                    {/* Login Page */}
+                    {toggleLogin && (
+                        <Paper
+                            elevation={10}
+                            sx={{ padding: "30px", marginTop: "0" }}
                         >
-                            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                                <LockOutlinedIcon />
-                            </Avatar>
-                            <Typography component="h1" variant="h5">
-                                Sign in
-                            </Typography>
                             <Box
-                                component="form"
-                                onSubmit={loginUser}
-                                noValidate
-                                sx={{ mt: 1 }}
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                }}
                             >
-                                <TextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="email"
-                                    label="Email Address"
-                                    name="loginEmail"
-                                    autoComplete="email"
-                                />
-                                <TextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    name="loginPassword"
-                                    label="Password"
-                                    type="password"
-                                    id="password"
-                                    autoComplete="current-password"
-                                />
-                                {loginError && (
-                                    <FormHelperText error>
-                                        {loginError}
-                                    </FormHelperText>
-                                )}
-                                <LoadingButton
-                                    type="submit"
-                                    fullWidth
-                                    variant="contained"
-                                    sx={{ mt: 1, mb: 2 }}
-                                    loading={loading}
+                                <Avatar
+                                    sx={{ m: 1, bgcolor: "secondary.main" }}
                                 >
-                                    Sign In
-                                </LoadingButton>
-                                <Button
-                                    fullWidth
-                                    variant="outlined"
-                                    sx={{ mb: 2 }}
-                                    onClick={SignInWithGoogle}
+                                    <LockOutlinedIcon />
+                                </Avatar>
+                                <Typography component="h1" variant="h5">
+                                    Sign in
+                                </Typography>
+                                <Box
+                                    component="form"
+                                    onSubmit={loginUser}
+                                    noValidate
+                                    sx={{ mt: 1 }}
                                 >
-                                    <FcGoogle />
-                                    Sign In with Google
-                                </Button>
-                                <Grid container>
-                                    <Grid item>
-                                        <Link
-                                            href="#"
-                                            variant="body2"
-                                            onClick={handleToggleLogin}
-                                        >
-                                            {"Don't have an account? Sign Up"}
-                                        </Link>
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="email"
+                                        label="Email Address"
+                                        name="loginEmail"
+                                        autoComplete="email"
+                                    />
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        name="loginPassword"
+                                        label="Password"
+                                        type="password"
+                                        id="password"
+                                        autoComplete="current-password"
+                                    />
+                                    {loginError && (
+                                        <FormHelperText error>
+                                            {loginError}
+                                        </FormHelperText>
+                                    )}
+                                    <LoadingButton
+                                        type="submit"
+                                        fullWidth
+                                        variant="contained"
+                                        sx={{ mt: 1, mb: 2 }}
+                                        loading={loading}
+                                    >
+                                        Sign In
+                                    </LoadingButton>
+                                    <Button
+                                        fullWidth
+                                        variant="outlined"
+                                        sx={{ mb: 2 }}
+                                        onClick={SignInWithGoogle}
+                                    >
+                                        <FcGoogle />
+                                        Sign In with Google
+                                    </Button>
+                                    <Grid container>
+                                        <Grid item>
+                                            <Link
+                                                href="#"
+                                                variant="body2"
+                                                onClick={handleToggleLogin}
+                                            >
+                                                {
+                                                    "Don't have an account? Sign Up"
+                                                }
+                                            </Link>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
+                                </Box>
                             </Box>
-                        </Box>
-                    </Paper>
-                )}
-
-                {/* Register Page */}
-                {!toggleLogin && (
-                    <Paper
-                        elevation={10}
-                        sx={{ padding: "30px", marginTop: "64px" }}
-                    >
-                        <Box
-                            sx={{
-                                display: "flex",
-                                flexDirection: "column",
-                                alignItems: "center",
-                            }}
+                        </Paper>
+                    )}
+                    {/* Register Page */}
+                    {!toggleLogin && (
+                        <Paper
+                            elevation={10}
+                            sx={{ padding: "30px", marginTop: "64px" }}
                         >
-                            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                                <LockOutlinedIcon />
-                            </Avatar>
-                            <Typography component="h1" variant="h5">
-                                Register Account
-                            </Typography>
                             <Box
-                                component="form"
-                                onSubmit={registerEmail}
-                                noValidate
-                                sx={{ mt: 1 }}
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                }}
                             >
-                                <TextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="email"
-                                    label="Email Address"
-                                    name="registerEmail"
-                                    autoComplete="email"
-                                />
-                                <TextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    name="registerPassword"
-                                    label="Password"
-                                    type="password"
-                                    id="password"
-                                    autoComplete="current-password"
-                                />
-                                {registerError && (
-                                    <FormHelperText error>
-                                        {registerError}
-                                    </FormHelperText>
-                                )}
-                                <LoadingButton
-                                    type="submit"
-                                    fullWidth
-                                    variant="contained"
-                                    sx={{ mt: 1, mb: 2 }}
-                                    loading={loading}
+                                <Avatar
+                                    sx={{ m: 1, bgcolor: "secondary.main" }}
                                 >
-                                    Register
-                                </LoadingButton>
-
-                                <Grid container>
-                                    <Grid item>
-                                        <Link
-                                            href="#"
-                                            variant="body2"
-                                            onClick={handleToggleLogin}
-                                        >
-                                            {"Already have an account? Login"}
-                                        </Link>
+                                    <LockOutlinedIcon />
+                                </Avatar>
+                                <Typography component="h1" variant="h5">
+                                    Register Account
+                                </Typography>
+                                <Box
+                                    component="form"
+                                    onSubmit={registerEmail}
+                                    noValidate
+                                    sx={{ mt: 1 }}
+                                >
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="email"
+                                        label="Email Address"
+                                        name="registerEmail"
+                                        autoComplete="email"
+                                    />
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        name="registerPassword"
+                                        label="Password"
+                                        type="password"
+                                        id="password"
+                                        autoComplete="current-password"
+                                    />
+                                    {registerError && (
+                                        <FormHelperText error>
+                                            {registerError}
+                                        </FormHelperText>
+                                    )}
+                                    <LoadingButton
+                                        type="submit"
+                                        fullWidth
+                                        variant="contained"
+                                        sx={{ mt: 1, mb: 2 }}
+                                        loading={loading}
+                                    >
+                                        Register
+                                    </LoadingButton>
+                                    <Grid container>
+                                        <Grid item>
+                                            <Link
+                                                href="#"
+                                                variant="body2"
+                                                onClick={handleToggleLogin}
+                                            >
+                                                {
+                                                    "Already have an account? Login"
+                                                }
+                                            </Link>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
+                                </Box>
                             </Box>
-                        </Box>
-                    </Paper>
-                )}
-
-                <Copyright sx={{ mt: 8, mb: 4 }} />
-            </Container>
-        </ThemeProvider>
+                        </Paper>
+                    )}
+                    <Copyright sx={{ mt: 8, mb: 4 }} />
+                </Container>
+            </ThemeProvider>
+        </div>
     );
 }
